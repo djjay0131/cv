@@ -3,30 +3,24 @@
 Last updated: 2026-04-16
 
 ## Current Focus
-M1 of the `cv-website` feature is implemented: the LaTeX CV is now generated from a data-driven pipeline (YAML content pool + variant selectors + Jinja2 templates). M2 (Astro website repo) and M3 (polish) remain as separate future passes.
+M1 and M2 of the `cv-website` feature are implemented and deployed. M3 (polish pass) remains.
 
 ## Recent Significant Changes
-- `b89c380` — Initial Overleaf Import (only commit to date). The full Overleaf `curve`-based template and Jason's content landed together.
-- Copied agents and skills from `~/code/crew` and `~/code/template-paper` into `.claude/`.
-- Wrote the full `cv-website.md` spec under `llm/features/`, phased into M1/M2/M3.
-- **M1 implementation landed (this session, uncommitted):**
-  - Python project: `pyproject.toml`, `.venv/`, `.gitignore`.
-  - `tools/` package: `schema.py`, `converters.py`, `resolver.py`, `render.py`, `lint_bib.py`, plus tests (112 passing, 100% coverage, ruff clean).
-  - Data layer: `data/content/*.yaml` (content pool with stable IDs) + `data/variants/academic.yaml` (selector).
-  - Templates: `templates/tex/*.tex.j2` (7 section templates).
-  - `cv-llt.tex`: now `\input`s generated fragments via `\cvvariant` (default "academic"); `\mynames` sourced from data.
-  - `Makefile`: `make academic` runs lint → render → latexmk.
-  - `.github/workflows/build-cv.yml`: CI for lint, tests, PDF build, release artifact, and (gated) `repository_dispatch` to the future website repo.
+- M1 landed across 3 commits on `cv` repo (`e01c4f0`, `6de457d`, `3620d99`): data-driven CV pipeline, \makerubric fix, deprecated .tex cleanup.
+- M1 CI is green — PDF artifact published at https://github.com/djjay0131/cv/releases/tag/latest
+- **M2 landed**: new `website` repo at https://github.com/djjay0131/website
+  - Astro-based static site deployed to GitHub Pages at https://djjay0131.github.io/website/
+  - Pages: landing (`/`), CV (`/cv/academic`), papers (`/papers`), PDF download (`/pdfs/academic.pdf`)
+  - Lib: `cv-data.ts` (YAML loader + resolver), `bib.ts` (bibtex parser), `md.ts` (Markdown → HTML)
+  - 20 vitest tests passing
+  - CI: push + `repository_dispatch` + hourly cron triggers; fetches data/PDF from cv repo release
 
 ## Open Decisions / Questions
-- **PDF compile environmental gap**: local MacTeX is missing `cochineal`, `cabin`, `inconsolata-type1` font packages. The generator side works end-to-end; final PDF verification requires `sudo tlmgr install cochineal cabin inconsolata-type1` (or equivalent).
-- **Deprecated hand-authored `.tex` files** (`summary.tex`, `employment.tex`, `education.tex`, `projects.tex`, `skills.tex`, `misc.tex`, `referee.tex`, `referee-full.tex`): still in working tree. Spec says remove only after AC-1 PDF parity is confirmed. Pending.
-- **`\mynames` template placeholder fix**: done — `cv-llt.tex` now pulls `\mynames{Cusati/Jason}` from the generated `_preamble.tex`. The Overleaf template's Lim/Wong placeholders are gone.
-- **`repository_dispatch` target**: workflow step is written but disabled by default. Will enable once the `website` repo exists and a PAT is provisioned (M2).
+- **M3 items**: projects page, print CSS, accessibility gate (Lighthouse ≥95), SEO (OG/JSON-LD/sitemap), smoke tests, build-failure notifications — all deferred to M3.
+- **repository_dispatch from cv → website**: the cv repo's workflow has the dispatch step gated on a `WEBSITE_DISPATCH_PAT` secret. Need to create a PAT and configure it for automated triggering.
+- **Custom domain**: site is at `djjay0131.github.io/website/`; could move to a custom domain or rename repo to `djjay0131.github.io` for root-level hosting.
 
 ## Immediate Next Steps
-1. Install missing TeX packages and compile: `sudo tlmgr install cochineal cabin inconsolata-type1` then `make academic`. Visually review `build/academic/academic.pdf` against the prior Overleaf output.
-2. Once parity is confirmed, remove the deprecated hand-authored `.tex` files from the working tree (they remain in git history via `b89c380`).
-3. Commit the M1 implementation.
-4. Plan M2 (website repo) — separate repo, Astro-based, consumes this repo's published data artifact.
-5. Consider a follow-up task to define the variant selector DSL (per the spec) once additional resume versions are provided for mapping.
+1. Optionally start M3 (polish pass) — or ship M2 as-is and iterate.
+2. Create a PAT for the cv → website `repository_dispatch` trigger.
+3. Consider variant selector DSL follow-up once additional resume versions are provided.

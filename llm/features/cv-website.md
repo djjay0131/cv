@@ -6,7 +6,7 @@
 
 ## Milestone Status
 - **M1** — IMPLEMENTED (uncommitted). Python generator, templates, data layer, Makefile, CI workflow all landed; 112 tests / 100% coverage / ruff clean. Final PDF compile blocked on local TeX Live missing `cochineal`/`cabin`/`inconsolata-type1` fonts — environmental, not a code defect.
-- **M2** — NOT STARTED. New Astro-based `website` repo TBD.
+- **M2** — IMPLEMENTED. Astro website deployed at https://djjay0131.github.io/website/. Landing page, CV page, papers page, PDF download — all live. 20 vitest tests passing. CI fetches data from cv repo release, builds, deploys to GitHub Pages.
 - **M3** — NOT STARTED. Polish pass (print CSS, a11y, SEO, smoke tests, notifications) TBD.
 
 ## Problem
