@@ -1,0 +1,16 @@
+\begin{rubric}{Miscellaneous Experience}
+{% if misc.awards %}
+\subrubric{Awards and Achievements}
+{% for a in misc.awards %}
+\entry*[{% if a.dates %}{{ a.dates }}{% endif %}] {{ a.text | md_to_latex }}
+{% endfor %}
+
+{% endif %}
+{% if misc.certifications %}
+\subrubric{Certification}
+{% for c in misc.certifications %}
+\entry*{ {{- c.text | md_to_latex -}} }
+{% endfor %}
+
+{% endif %}
+\end{rubric}

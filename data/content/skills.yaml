@@ -1,0 +1,47 @@
+- id: platforms
+  group: "Platforms"
+  items:
+    - "Windows"
+    - "Linux"
+    - "IIS"
+    - "Apache"
+    - "Tomcat"
+
+- id: tools
+  group: "Tools"
+  items:
+    - "SQL Server"
+    - "MySQL"
+    - "Oracle"
+    - "PostgreSQL"
+    - ".NET"
+    - "Atlassian"
+    - "Azure"
+    - "ADO"
+    - "Docker"
+    - "Octopus"
+    - "Streamlit"
+    - "FastAPI"
+
+- id: languages
+  group: "Languages"
+  items:
+    - "C#"
+    - "Java"
+    - "Python"
+    - "JavaScript"
+    - "Kotlin"
+    - "VB.NET"
+    - "PowerShell"
+    - "Bash"
+
+- id: ai-ml
+  group: "AI/ML"
+  items:
+    - "scikit-learn"
+    - "TensorFlow"
+    - "LSTM"
+    - "LLM"
+    - "SVM"
+    - "Random Forest"
+    - "Feature Engineering"

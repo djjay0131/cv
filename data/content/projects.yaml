@@ -1,0 +1,15 @@
+- id: llm-coding-assistant
+  name: "LLM Coding Assistant"
+  summary: "Python, Streamlit, OpenAI API; FastAPI backend; agentmon design."
+
+- id: security-classifier
+  name: "Security Vulnerability Classifier"
+  summary: "Repository scanner classifying code against CVE mappings."
+
+- id: sentiment-yelp
+  name: "Sentiment Analysis of Yelp Reviews"
+  summary: "Python, Pandas, NLTK; topic modeling with LDA."
+
+- id: nfl-ml
+  name: "Predicting NFL Player Performance"
+  summary: "Time-series modeling using ML regressors."

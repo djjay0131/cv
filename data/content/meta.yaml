@@ -1,0 +1,11 @@
+name: "Jason Cusati"
+contact:
+  email: "djjay@vt.edu"
+  linkedin: "jason-cusati"
+  github: "djjay0131"
+  x: "djjay0131"
+photo: "photo_jason_1"
+include_photo: true
+name_variants:
+  - family: "Cusati"
+    given: "Jason"

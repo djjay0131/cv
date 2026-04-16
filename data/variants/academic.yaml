@@ -1,0 +1,40 @@
+variant: academic
+
+sections:
+  - type: summary
+    content_id: academic
+
+  - type: employment
+    include:
+      - yoh-adf-architect
+      - duck-creek-architect
+      - blackbaud-principal
+      - blackbaud-solutions
+      - djjaynet-consultant
+
+  - type: education
+    include:
+      - phd-cs-vt
+      - meng-cs-vt
+      - bs-econ-vt
+
+  - type: projects
+    include:
+      - llm-coding-assistant
+      - security-classifier
+      - sentiment-yelp
+      - nfl-ml
+
+  - type: publications
+
+  - type: skills
+    include:
+      - platforms
+      - tools
+      - languages
+      - ai-ml
+
+  - type: misc
+
+  - type: referee
+    content_id: available

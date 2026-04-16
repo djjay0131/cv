@@ -1,0 +1,15 @@
+\begin{rubric}{Professional Experience}
+
+{% for role in employment %}
+\entry*[{{ role.dates }}]
+    \textbf{ {{- role.company | md_to_latex }} --- {{ role.location | md_to_latex -}} } \emph{ {{- role.title | md_to_latex -}} } \begin{itemize}
+{% for bullet in role.bullets %}
+        \item {{ bullet.text | md_to_latex }}
+{% if not loop.last %}
+
+{% endif %}
+{% endfor %}
+    \end{itemize}
+
+{% endfor %}
+\end{rubric}

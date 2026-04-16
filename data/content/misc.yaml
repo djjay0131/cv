@@ -1,0 +1,12 @@
+awards:
+  - id: limeleap-cs-award
+    dates: "2008"
+    text: "**Customer Service Award**, LimeLeap Professional Services."
+
+certifications:
+  - id: jira-confluence
+    text: "Certified Jira & Confluence Administrator"
+  - id: scrum-master
+    text: "Certified Scrum Master"
+  - id: csslp
+    text: "Certified Secure Software Lifecycle Professional (CSSLP)"

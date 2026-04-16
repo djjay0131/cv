@@ -1,0 +1,7 @@
+\begin{rubric}{Technical Skills}
+{% for group in skills %}
+\subrubric{ {{- group.group | md_to_latex -}} }
+\entry*{ {{- group.items | map('md_to_latex') | join('; ') -}} }
+
+{% endfor %}
+\end{rubric}

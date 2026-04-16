@@ -1,0 +1,84 @@
+- id: yoh-adf-architect
+  dates: "2024--2025"
+  company: "Yoh, A Day & Zimmerman Company"
+  location: "Remote, SC"
+  title: "ADF Solution Architect -- Core Specialty Insurance"
+  bullets:
+    - id: yoh-mvp
+      text: >-
+        Built a small SDE team and delivered an MVP Insurance Data Ingestion
+        Platform using Microsoft's Common Data Model, reducing time-to-ingest
+        by **50%**.
+    - id: yoh-api
+      text: "Architected and implemented an API to orchestrate Azure Data Factory pipelines and data flows."
+    - id: yoh-llm
+      text: "Prototyped LLM-assisted source-to-target mapping generating ADF transformations and derived columns."
+    - id: yoh-streamlit
+      text: "Built a Streamlit UI integrated with the Data Ingestion API for faster analyst feedback loops."
+
+- id: duck-creek-architect
+  dates: "2021--2023"
+  company: "Duck Creek Technologies"
+  location: "Columbia, SC"
+  title: "Senior Technical Architect -- OnDemand SaaS Operations"
+  bullets:
+    - id: dc-launch
+      text: "Led first client launch on accelerated 3-month timeline with automated deployments to Azure Storage, Key Vault, Redis, and Docker."
+    - id: dc-integration
+      text: "Designed end-to-end data integration/transformation across hybrid SaaS systems."
+    - id: dc-adf
+      text: "Drove ADF implementation connecting Duck Creek data with customer Data Lakes."
+    - id: dc-deployment
+      text: >-
+        Built deployment analysis framework (C#, PowerShell, Octopus, ADO)
+        eliminating **75%** of deployment issues.
+    - id: dc-sev1
+      text: "Developed Python algorithm to predict Sev 1 incidents from logs."
+
+- id: blackbaud-principal
+  dates: "2016--2020"
+  company: "Blackbaud"
+  location: "Charleston, SC"
+  title: "Principal Engineer -- Sustained Engineering"
+  bullets:
+    - id: bb-root-cause
+      text: >-
+        Delivered root-cause production fixes across enterprise products using
+        C#, SQL, and performance tooling; achieved **100%** resolution on
+        critical cases.
+    - id: bb-devops
+      text: >-
+        Cut deployment time and customer involvement by **50%** via DevOps
+        scripting and YAML pipelines.
+    - id: bb-sla
+      text: >-
+        Met **100% SLA** for Tier 3 support, improving VB.NET, C#, and Java
+        systems.
+    - id: bb-sso
+      text: "Designed SAML 2.0 SSO component; published REST APIs to Azure using Swagger-based codegen."
+
+- id: blackbaud-solutions
+  dates: "2011--2016"
+  company: "Blackbaud"
+  location: "Charleston, SC"
+  title: "Solution Architect -- Enterprise Professional Services"
+  bullets:
+    - id: bb-sa-implementations
+      text: "Led multiple enterprise implementations from architecture to go-live; coordinated global teams."
+    - id: bb-sa-integrations
+      text: >-
+        Designed full CRM integrations and migration strategies, reducing
+        timelines by **50%**.
+    - id: bb-sa-azure
+      text: "Built Azure environments for development and CI/CD."
+
+- id: djjaynet-consultant
+  dates: "2005--2011"
+  company: "DJJayNet Consulting"
+  location: "Arlington, VA"
+  title: "Software Engineering Consultant"
+  bullets:
+    - id: dj-crestron
+      text: "Integrated user interfaces with Crestron touch hardware using custom .NET controls."
+    - id: dj-ef
+      text: "Implemented REST APIs with Entity Framework and C#."

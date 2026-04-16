@@ -1,0 +1,5 @@
+\begin{rubric}{Education}
+{% for e in education %}
+\entry*[{% if e.dates %}{{ e.dates | md_to_latex }}{% endif %}]{\textbf{ {{- e.degree | md_to_latex -}} }, {{ e.institution | md_to_latex }}, {{ e.location | md_to_latex }}}
+{% endfor %}
+\end{rubric}
