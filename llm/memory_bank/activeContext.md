@@ -1,26 +1,32 @@
 # Active Context
 
-Last updated: 2026-04-16
+Last updated: 2026-04-17
 
 ## Current Focus
-M1 and M2 of the `cv-website` feature are implemented and deployed. M3 (polish pass) remains.
+All three milestones (M1, M2, M3) of the `cv-website` feature are implemented and deployed. The data-driven CV pipeline and personal website are fully operational.
 
 ## Recent Significant Changes
-- M1 landed across 3 commits on `cv` repo (`e01c4f0`, `6de457d`, `3620d99`): data-driven CV pipeline, \makerubric fix, deprecated .tex cleanup.
-- M1 CI is green — PDF artifact published at https://github.com/djjay0131/cv/releases/tag/latest
-- **M2 landed**: new `website` repo at https://github.com/djjay0131/website
-  - Astro-based static site deployed to GitHub Pages at https://djjay0131.github.io/website/
-  - Pages: landing (`/`), CV (`/cv/academic`), papers (`/papers`), PDF download (`/pdfs/academic.pdf`)
-  - Lib: `cv-data.ts` (YAML loader + resolver), `bib.ts` (bibtex parser), `md.ts` (Markdown → HTML)
-  - 20 vitest tests passing
-  - CI: push + `repository_dispatch` + hourly cron triggers; fetches data/PDF from cv repo release
+- **M1**: Data-driven CV pipeline in `cv` repo — YAML content pool + variant selectors + Python generator + Jinja templates + CI producing PDF artifact. 112 pytest tests, 100% coverage.
+- **M2**: Astro website at https://djjay0131.github.io/website/ — landing page, CV page, papers page, PDF download. 20 vitest tests.
+- **M3**: Polish pass — projects page (index + 4 detail pages), print CSS, accessibility (skip-link, ARIA landmarks, WCAG AA colors), SEO (OG/Twitter cards, canonical URLs, JSON-LD Person schema, sitemap, robots.txt), post-deploy smoke tests (HTTP 200 + body size), build-failure notification webhook (gated on NOTIFICATION_WEBHOOK secret).
+
+## Live URLs
+- https://djjay0131.github.io/website/ (landing)
+- https://djjay0131.github.io/website/cv/academic (CV)
+- https://djjay0131.github.io/website/papers (papers)
+- https://djjay0131.github.io/website/projects (projects)
+- https://djjay0131.github.io/website/pdfs/academic.pdf (PDF download)
+- https://github.com/djjay0131/cv/releases/tag/latest (CV artifacts)
 
 ## Open Decisions / Questions
-- **M3 items**: projects page, print CSS, accessibility gate (Lighthouse ≥95), SEO (OG/JSON-LD/sitemap), smoke tests, build-failure notifications — all deferred to M3.
-- **repository_dispatch from cv → website**: the cv repo's workflow has the dispatch step gated on a `WEBSITE_DISPATCH_PAT` secret. Need to create a PAT and configure it for automated triggering.
-- **Custom domain**: site is at `djjay0131.github.io/website/`; could move to a custom domain or rename repo to `djjay0131.github.io` for root-level hosting.
+- **repository_dispatch from cv → website**: still gated on WEBSITE_DISPATCH_PAT secret. Create a PAT to enable automated triggering when cv content changes.
+- **NOTIFICATION_WEBHOOK**: smoke test and failure notifications are wired but gated on this secret. Configure when ready.
+- **Custom domain**: site is at `djjay0131.github.io/website/`; could rename repo to `djjay0131.github.io` for root-level hosting or add a CNAME.
+- **Variant selector DSL**: follow-up task for bullet-level filtering/overrides once additional resume versions are provided.
+- **Lighthouse CI gate (AC-13 formal)**: WCAG AA colors and semantic HTML are in place; formal `@axe-core/playwright` CI gate deferred — can be added when Playwright is integrated.
 
 ## Immediate Next Steps
-1. Optionally start M3 (polish pass) — or ship M2 as-is and iterate.
-2. Create a PAT for the cv → website `repository_dispatch` trigger.
-3. Consider variant selector DSL follow-up once additional resume versions are provided.
+1. Optionally configure the PAT for cv → website repository_dispatch.
+2. Optionally configure the NOTIFICATION_WEBHOOK secret.
+3. Content work: upload existing resume versions for the variant selector DSL.
+4. Consider renaming repo for root-level hosting or adding a custom domain.

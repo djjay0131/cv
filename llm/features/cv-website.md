@@ -1,13 +1,13 @@
 # Feature: Personal Website (CV + Papers + Projects) with Data-Driven CV Pipeline
 
-**Status:** SPECIFIED (M1 IMPLEMENTED — PDF compile verification pending)
+**Status:** IMPLEMENTED (M1 + M2 + M3 complete)
 **Date:** 2026-04-16
 **Author:** Feature Architect (AI-assisted)
 
 ## Milestone Status
 - **M1** — IMPLEMENTED (uncommitted). Python generator, templates, data layer, Makefile, CI workflow all landed; 112 tests / 100% coverage / ruff clean. Final PDF compile blocked on local TeX Live missing `cochineal`/`cabin`/`inconsolata-type1` fonts — environmental, not a code defect.
 - **M2** — IMPLEMENTED. Astro website deployed at https://djjay0131.github.io/website/. Landing page, CV page, papers page, PDF download — all live. 20 vitest tests passing. CI fetches data from cv repo release, builds, deploys to GitHub Pages.
-- **M3** — NOT STARTED. Polish pass (print CSS, a11y, SEO, smoke tests, notifications) TBD.
+- **M3** — IMPLEMENTED. Projects page, print CSS, accessibility (skip-link, ARIA, WCAG AA colors), SEO (OG/Twitter/canonical/JSON-LD/sitemap/robots.txt), post-deploy smoke tests, failure notifications. 8 pages, all live, smoke tests passing in CI.
 
 ## Problem
 
