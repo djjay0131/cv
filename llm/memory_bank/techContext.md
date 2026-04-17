@@ -1,56 +1,108 @@
 # Tech Context
 
-## Language & Format
-- **LaTeX** source, using the `curve` document class (a CV-oriented class popularized by LianTze Lim's Overleaf template). Entry point: `cv-llt.tex`.
-- Bibliography managed with `biblatex` + `biber` backend; entries live in `own-bib.bib`.
+Last updated: 2026-04-17
 
-## Toolchain
-- Preferred engine: **XeLaTeX** or **LuaLaTeX** (enables the `fontspec` font stack: `cochineal`, `cabin`, `zi4` — see `cv-llt.tex:39-50`).
-- Fallback: pdfLaTeX with T1 fontenc.
-- Bibliography: run `biber cv-llt` after the first LaTeX pass.
+## Languages & Formats
+- **YAML** — canonical content source (`data/content/*.yaml`, `data/variants/*.yaml`).
+- **Python 3.9+** — generator tooling (`tools/`): schema validation (Pydantic), Jinja2 template rendering, Markdown→LaTeX/HTML converters, bib linter.
+- **LaTeX** — `curve` document class. Driver: `cv-llt.tex`. Styling: `settings.sty`. Bib: `own-bib.bib` via `biblatex`/`biber`.
+- **TypeScript + Astro** — website repo (`djjay0131/website`). Data loading, bib parsing, Markdown→HTML.
 
-## Build
-Typical build sequence (no Makefile present yet):
+## CV Repo (`djjay0131/cv`)
+
+### Build
+```bash
+make academic          # lint bib → render YAML→tex → latexmk → PDF
+.venv/bin/pytest       # 112 tests, 100% coverage
+.venv/bin/ruff check . # lint
 ```
-xelatex cv-llt.tex
-biber cv-llt
-xelatex cv-llt.tex
-xelatex cv-llt.tex
-```
-Produces `cv-llt.pdf`. Overleaf handles this automatically; locally, a LaTeX installation (TeX Live / MacTeX) is required.
 
-## Key Dependencies (LaTeX packages)
-- `curve` — document class providing `\makerubric`, `\entry*`, `\leftheader`, `\photo`, etc.
-- `biblatex` + `csquotes` — publication list formatting (IEEE style, `cv-llt.tex:16`).
-- `fontawesome5`, `simpleicons` — icons (envelope, LinkedIn, GitHub, X/Twitter).
-- `tikz` — used for the "swish" rubric header shade and the circled numbers on bibliography entries (`settings.sty:50-92`).
-- `hyperref` with `colorlinks=true,allcolors=black` (`settings.sty:147`).
-- `cochineal`, `cabin`, `zi4` — OpenType font packages (XeLaTeX/LuaLaTeX path).
+### Python Dependencies
+Declared in `pyproject.toml`:
+- `pyyaml`, `jinja2`, `pydantic` (>=2.5), `bibtexparser` (>=1.4)
+- Dev: `pytest`, `pytest-cov`, `ruff`
 
-## Structure on Disk (current)
+### LaTeX Dependencies
+- TeX Live / MacTeX with `xelatex`, `biber`, `latexmk`
+- Packages: `curve`, `biblatex`, `fontspec`, `cochineal`, `cabin`, `zi4` (Inconsolata), `fontawesome5`, `simpleicons`, `tikz`, `hyperref`
+
+### Structure on Disk
 ```
 cv/
-├── cv-llt.tex        # main entry
-├── settings.sty      # style / package setup
-├── summary.tex       # Professional Summary rubric
-├── employment.tex    # Professional Experience rubric
-├── education.tex     # Education rubric
-├── projects.tex      # Selected Projects & Research
-├── publications.tex  # bibliography dispatch (journal/conf/books)
-├── skills.tex        # Technical Skills
-├── misc.tex          # Awards / Certifications
-├── referee.tex       # "Available on request"
-├── referee-full.tex  # full referee list (currently commented out in main)
-├── own-bib.bib       # bibliography entries
-├── photo.jpg         # photo asset (unused name variant)
-└── photo_jason_1.jpeg  # photo referenced by \photo[r]{photo_jason_1}
+├── cv-llt.tex              # LaTeX driver (\makerubric's generated fragments)
+├── settings.sty            # style / package setup (unchanged from Overleaf)
+├── publications.tex        # biblatex dispatch (journal/conf/books)
+├── own-bib.bib             # single source of truth for publications
+├── photo_jason_1.jpeg      # photo asset
+├── data/
+│   ├── content/            # canonical YAML content pool (each item has stable ID)
+│   │   ├── meta.yaml       # name, contact, photo, name_variants
+│   │   ├── summaries.yaml
+│   │   ├── employment.yaml
+│   │   ├── education.yaml
+│   │   ├── projects.yaml
+│   │   ├── skills.yaml
+│   │   ├── misc.yaml
+│   │   └── referees.yaml
+│   └── variants/
+│       └── academic.yaml   # selector: references content pool IDs
+├── templates/tex/          # Jinja2 templates → .tex fragments
+│   ├── summary.tex.j2
+│   ├── employment.tex.j2
+│   ├── education.tex.j2
+│   ├── projects.tex.j2
+│   ├── skills.tex.j2
+│   ├── misc.tex.j2
+│   └── referee.tex.j2
+├── tools/                  # Python generator + linter
+│   ├── schema.py           # Pydantic models + content/variant loaders
+│   ├── converters.py       # md_to_latex, md_to_html
+│   ├── resolver.py         # maps variant selector → content pool items
+│   ├── render.py           # orchestrator: load → validate → resolve → render
+│   ├── lint_bib.py         # validates own-bib.bib
+│   └── tests/              # 112 pytest tests
+├── build/                  # gitignored; generated .tex + compiled PDFs
+├── Makefile                # `make academic` → lint + render + latexmk
+├── .github/workflows/
+│   └── build-cv.yml        # CI: lint, test, render, compile, publish release
+├── pyproject.toml
+└── llm/                    # memory bank + feature specs
 ```
 
-## Deployment / Hosting
-- Origin: Overleaf import (see `b89c380 Initial Overleaf Import`).
-- Distribution: compiled PDF shared manually. No CI/CD, no hosting infra.
+### CI / Deployment
+- GitHub Actions (`build-cv.yml`): on push to master → lint bib → pytest → ruff → render → compile PDF (via `xu-cheng/latex-action` with full TeX Live) → upload PDF + `cv-data.zip` to rolling `latest` release.
+- `repository_dispatch` to website repo is wired but gated on `WEBSITE_DISPATCH_PAT` secret.
+
+## Website Repo (`djjay0131/website`)
+
+### Build
+```bash
+npm test              # 20 vitest tests
+npm run build         # 8 Astro pages
+```
+
+### Dependencies
+- Node 22+, Astro 6+, `@citation-js/core`, `@citation-js/plugin-bibtex`, `js-yaml`, `vitest`, `@astrojs/sitemap`
+
+### Structure
+```
+website/
+├── src/
+│   ├── pages/          # index, cv/[variant], papers/, projects/
+│   ├── layouts/        # Base.astro (OG, Twitter, JSON-LD, a11y)
+│   └── lib/            # cv-data.ts, bib.ts, md.ts + tests
+├── public/             # static assets (photo, favicon, PDFs, robots.txt)
+├── .github/workflows/
+│   └── build.yml       # fetch data → test → build → deploy → smoke test
+└── astro.config.mjs    # site + base URL + sitemap
+```
+
+### CI / Deployment
+- GitHub Actions: on push / `repository_dispatch` / hourly cron → fetch `cv-data.zip` + `academic.pdf` from cv repo's `latest` release → npm test → npm build → deploy to GitHub Pages → smoke test (5 routes).
+- Live at https://djjay0131.github.io/website/
 
 ## Technical Constraints
-- `curve` class customizations flow through `settings.sty`; ad-hoc redefinitions in `cv-llt.tex` must come **after** `\usepackage{settings}` (already true for the `\DefineBibliographyStrings` override on `cv-llt.tex:22`).
-- The `\mynames{...}` list bolding only works when `.bib` author names use `\bibnamedelima` (for space) or `\bibnamedelimi` (for initials) — see comment at `cv-llt.tex:27-36`.
-- Photo display is toggled via `\includecomment{fullonly}` / `\excludecomment{fullonly}` (`cv-llt.tex:63-64`).
+- `curve.cls` defines `\makerubric` as `\LTXtable{\linewidth}{...}` — raw `\input` does NOT work; always use `\makerubric` for section files.
+- `\mynames` is generated into `build/<variant>/tex/_preamble.tex` from `meta.yaml:name_variants`.
+- Python targets 3.9 (system Python on the dev machine); `Optional[X]` syntax used instead of `X | None` for Pydantic compat.
+- `@citation-js/core` has no published TypeScript types; custom declarations in `src/lib/citation-js.d.ts`.

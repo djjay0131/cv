@@ -1,35 +1,45 @@
 # Progress
 
-Last updated: 2026-04-15
+Last updated: 2026-04-17
 
 ## Built & Working
-- Compilable LaTeX CV based on the `curve` document class (Overleaf import).
-- Header with name, email, X/Twitter, LinkedIn, GitHub, and conditional photo (`cv-llt.tex:70-90`).
-- Section content in place:
-  - Professional Summary (`summary.tex`).
-  - Professional Experience — 2005–2025, five roles from DJJayNet → Yoh/Core Specialty Insurance (`employment.tex`).
-  - Education — PhD CS (SE with AI/ML/MI) exp. 2027 at Virginia Tech; M.Eng. CS exp. 2025; prior M.I.T. + B.S. Economics at Virginia Tech (`education.tex`).
-  - Selected Projects & Research — 4 entries (`projects.tex`).
-  - Publications — dispatch to journal articles / conference proceedings / books via `biblatex` (`publications.tex`) against `own-bib.bib`.
-  - Technical Skills — Platforms, Tools, Languages, AI/ML (`skills.tex`).
-  - Awards & Certifications (`misc.tex`).
-  - Referee section — "Available on Request" variant active; full variant (`referee-full.tex`) present but commented out (`cv-llt.tex:110-111`).
-- LLM workflow scaffolding: `.claude/agents/` and `.claude/skills/` populated; `llm/memory_bank/` and `llm/features/` initialized.
+
+### CV Repo (`djjay0131/cv`)
+- **Data-driven CV pipeline** (M1): YAML content pool with stable IDs (`data/content/`) + variant selector (`data/variants/academic.yaml`) → Python generator (`tools/render.py` with Pydantic validation + Jinja2 templates) → LaTeX fragments (`build/<variant>/tex/`) → PDF via `latexmk`.
+- **Makefile**: `make academic` runs lint → render → compile end-to-end.
+- **CI** (`.github/workflows/build-cv.yml`): on push → lint bib → pytest (112 tests, 100% coverage) → ruff → render → compile PDF → publish PDF + `cv-data.zip` to `latest` GitHub Release.
+- **`\mynames` fix**: author-bolding in bibliography now uses `Cusati/Jason` from the data layer, not the Overleaf template's Lim/Wong placeholders.
+- **Hand-authored section files removed** (`summary.tex`, `employment.tex`, etc.) — content lives in YAML; files preserved in git history via `b89c380`.
+- **Bib linting**: `tools/lint_bib.py` validates `own-bib.bib` for missing years, required fields.
+
+### Website Repo (`djjay0131/website`)
+- **Landing page** (`/`): photo, bio, contact links, CTA buttons to CV/papers/PDF.
+- **CV page** (`/cv/academic`): full academic CV rendered from YAML data, with JSON-LD Person schema.
+- **Papers page** (`/papers`): publications parsed from `own-bib.bib`, grouped by type, year-descending, with GitHub links where present.
+- **Projects page** (`/projects` + detail pages): 4 project entries from content pool with GitHub links.
+- **SEO**: OpenGraph, Twitter cards, canonical URLs, JSON-LD, sitemap, robots.txt on every page.
+- **Accessibility**: skip-to-main link, ARIA landmarks, WCAG AA color contrast.
+- **Print CSS**: hides chrome, shows PDF download banner.
+- **CI** (`.github/workflows/build.yml`): fetch data from cv repo release → vitest (20 tests) → Astro build (8 pages) → deploy to GitHub Pages → smoke test (5 routes, HTTP 200 + body size).
+- **Live at** https://djjay0131.github.io/website/
+- **Feature status**: VERIFIED (all 4 quality gates passed, all 16 acceptance criteria validated).
 
 ## Remaining To Build
-- Additional CV variants (industry/resume, short CV) in their own folders.
-- Folder-based layout migration once a second variant is introduced.
-- Decision + implementation for shared assets (`own-bib.bib`, photos, `settings.sty`) across variants.
-- Build automation (e.g., `latexmk` rule or `Makefile`) for local reproducible builds.
-- Tailored versions of the academic CV for specific research roles / internships.
-- Content review: `own-bib.bib` contents have not been inspected in this memory bank pass — publication list accuracy/coverage is unverified.
+- **Variant selector DSL**: bullet-level inclusion/exclusion, per-variant overrides/rewording — designed when Jason uploads existing resume versions.
+- **Additional CV variants** (industry resume, short CV): requires the selector DSL + new `data/variants/*.yaml` files.
+- **Sync enforcement skill**: `constellize`-style skill checking CV↔website alignment.
+- **Formal Lighthouse CI gate**: WCAG AA colors and semantic HTML are in place; `@axe-core/playwright` integration deferred.
+- **Custom domain or root-level hosting**: site is at `djjay0131.github.io/website/`; could rename repo to `djjay0131.github.io` or add a CNAME.
+- **`repository_dispatch` activation**: PAT needed for automated cv → website triggering.
+- **`NOTIFICATION_WEBHOOK` configuration**: failure notifications are wired but gated on this secret.
 
 ## Known Issues / Tech Debt
-- `\mynames{...}` in `cv-llt.tex:32-35` still contains the template's example names ("Lim/Lian Tze", "Wong/Lian Tze", "Lim/Tracy", "Lim/L.T.") rather than Jason's own name variants. Result: author bolding in the bibliography will not match Jason's entries until this is updated.
-- Two photo files exist (`photo.jpg`, `photo_jason_1.jpeg`); only `photo_jason_1` is referenced. The unused `photo.jpg` is likely cruft.
-- Commented `% \mynames{Lim/Lian\bibnamedelima Tze}` on `cv-llt.tex:29` is legacy from the template.
-- No Makefile / build script; builds rely on Overleaf or manual `xelatex` + `biber` invocations.
-- Flat directory layout will need reorganization once a second CV variant is added.
+- Local MacTeX (TeX Live 2025) can't install `cochineal`/`cabin`/`zi4` due to TeX Live version mismatch with remote repo (2026). PDF compiles in CI only. Not a blocker.
+- `cv_tools.egg-info/` directory in the repo root (artifact of early `pip install -e .` attempt). Harmless but should be gitignored or cleaned.
+- `@citation-js/core` has no published TypeScript types; custom `.d.ts` maintained in `src/lib/citation-js.d.ts`.
+- Node.js 20 deprecation warnings in CI for `actions/checkout@v4` etc. — will need v5 upgrades before Sept 2026.
 
 ## Milestones
-- **2026-04-15** — Initial Overleaf import committed; LLM workflow scaffolding (agents, skills, memory bank) established.
+- **2026-04-15** — Initial Overleaf import; LLM workflow scaffolding established.
+- **2026-04-16** — M1 implemented: data-driven CV pipeline. M2 implemented: Astro website deployed.
+- **2026-04-17** — M3 implemented: projects page, SEO, a11y, print CSS, smoke tests. Feature VERIFIED.

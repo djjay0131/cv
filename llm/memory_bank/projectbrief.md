@@ -1,36 +1,36 @@
 # Project Brief
 
 ## Name
-Jason Cusati — CV (LaTeX)
+Jason Cusati — CV + Personal Website
 
 ## Purpose
-Source repository for Jason Cusati's curriculum vitae, authored in LaTeX. Initial target variant is an **academic CV** for research roles and research internships. Additional variants (e.g., industry resume, short CV) will be added over time, each in its own folder so they can be tailored and built independently.
+Two-repo system for Jason Cusati's professional presence:
+1. **`cv` repo** — data-driven CV pipeline. Structured YAML content pool + variant selectors generate LaTeX fragments via Python/Jinja2, compiled to PDF by CI, and published as GitHub Release artifacts.
+2. **`website` repo** (`djjay0131/website`) — Astro-based personal website consuming the `cv` repo's data artifact. Renders the CV as HTML, lists publications from `own-bib.bib`, and hosts project pages. Deployed to GitHub Pages.
 
 ## Target Audience
-- Academic hiring committees / research groups considering Jason for research roles.
-- Internship programs (research-oriented) that review academic CVs.
-- Secondary audience later: industry recruiters (once tailored variants exist).
+- Academic hiring committees / research groups evaluating Jason for research roles or internships — via the website's CV page or the downloadable PDF.
+- Collaborators discovering Jason's publications and project artifacts via the papers and projects pages.
+- Industry recruiters (once tailored industry-variant CV is created).
 
 ## Problem Being Solved
-Keep a single, version-controlled source of truth for the CV so that:
-- Content edits (employment, education, publications) are tracked in git.
-- Multiple tailored variants can share underlying content without drift.
-- The document is reproducible via LaTeX (originally imported from Overleaf).
+- Reviewers previously had to request or download a PDF to see Jason's credentials; now they visit the public website.
+- Publications in `own-bib.bib` were invisible on the open web; now surfaced on the papers page with GitHub links.
+- Future CV variants (academic, industry, short) share a canonical content pool so facts are maintained in one place.
 
 ## Scope
 **In scope:**
-- The current top-level academic CV (based on the `curve` LaTeX class, Overleaf import).
-- Future sibling folders for additional CV/resume variants.
-- Supporting bibliography (`own-bib.bib`) and section files (`education.tex`, `employment.tex`, `publications.tex`, etc.).
-- Tailoring content for specific research roles / internships.
+- The `cv` repo: YAML data layer (`data/content/*.yaml`, `data/variants/*.yaml`), Python generator (`tools/`), Jinja2 LaTeX templates (`templates/tex/`), `Makefile`, CI workflow, and the LaTeX driver (`cv-llt.tex` + `settings.sty`).
+- The `website` repo: Astro site with landing, CV, papers, and projects pages; CI that fetches data from the `cv` repo's release and deploys to GitHub Pages.
+- Supporting bibliography (`own-bib.bib`) and photo assets.
 
 **Out of scope:**
-- Cover letters, research statements, teaching statements (not handled here unless explicitly added later).
-- Hosting or public web distribution of the compiled PDF.
-- Non-CV documents.
+- Cover letters, research statements, teaching statements.
+- Blog engine (site architecture supports it later, but not in v1).
+- Per-page custom OpenGraph images (deferred).
 
 ## Constraints
-- Must compile with a standard LaTeX toolchain; the template prefers XeLaTeX/LuaLaTeX for OpenType font support but falls back to pdfLaTeX (see `cv-llt.tex:39-50`).
-- Uses the `curve` document class (imported from Overleaf) and custom styling in `settings.sty` — changes should respect that class's commands (`\makerubric`, `\entry*`, etc.).
-- Bibliography styled via `biblatex` with IEEE style (`cv-llt.tex:16`). Author-name bolding depends on `\mynames{...}` being kept in sync with Jason's name variants.
-- Photo is included only when the `fullonly` environment is active (`cv-llt.tex:63,87-90`).
+- LaTeX side compiles with XeLaTeX via the `curve` document class; requires `cochineal`, `cabin`, `zi4` font packages.
+- `cv-llt.tex` uses `\makerubric{build/\cvvariant/tex/<section>}` (NOT `\input`) — `curve.cls` defines `\makerubric` as `\LTXtable{\linewidth}{...}`, which wraps the input in a longtable context required by the `rubric` environment.
+- Bibliography styled via `biblatex` with IEEE style. Author-name bolding via `\mynames{Cusati/Jason}` generated into `_preamble.tex` from `data/content/meta.yaml`.
+- Website is a static Astro site deployed to GitHub Pages at `djjay0131.github.io/website/`.
