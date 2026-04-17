@@ -83,7 +83,8 @@ class TestResolveVariant:
             sections=[VariantSection(type="employment", include=["duck", "yoh"])],
         )
         result = resolve_variant(pool, variant)
-        assert [r.id for r in result["employment"]] == ["duck", "yoh"]
+        assert [e.role.id for e in result["employment"]] == ["duck", "yoh"]
+        assert all(not e.collapse for e in result["employment"])
 
     def test_education_section(self) -> None:
         pool = _minimal_pool()
@@ -246,3 +247,247 @@ class TestSectionRequirements:
         with pytest.raises(ValueError) as exc:
             resolve_variant(pool, variant)
         assert "unknown-section" in str(exc.value)
+
+
+class TestBulletFiltering:
+    def test_filter_bullets_by_id(self) -> None:
+        pool = _minimal_pool()
+        variant = Variant(
+            variant="test",
+            sections=[
+                VariantSection(
+                    type="employment",
+                    include=[{"id": "yoh", "bullets": ["b1"]}],
+                )
+            ],
+        )
+        result = resolve_variant(pool, variant)
+        entry = result["employment"][0]
+        assert len(entry.role.bullets) == 1
+        assert entry.role.bullets[0].id == "b1"
+        assert not entry.collapse
+
+    def test_bullet_order_follows_selector(self) -> None:
+        """Bullets appear in the order listed in the selector, not pool order."""
+        pool = _minimal_pool()
+        # Add a second bullet to the yoh role.
+        pool.employment["yoh"] = pool.employment["yoh"].model_copy(
+            update={
+                "bullets": [
+                    Bullet(id="b1", text="first"),
+                    Bullet(id="b2", text="second"),
+                ]
+            }
+        )
+        variant = Variant(
+            variant="test",
+            sections=[
+                VariantSection(
+                    type="employment",
+                    include=[{"id": "yoh", "bullets": ["b2", "b1"]}],
+                )
+            ],
+        )
+        result = resolve_variant(pool, variant)
+        ids = [b.id for b in result["employment"][0].role.bullets]
+        assert ids == ["b2", "b1"]
+
+    def test_unknown_bullet_id_raises(self) -> None:
+        pool = _minimal_pool()
+        variant = Variant(
+            variant="test",
+            sections=[
+                VariantSection(
+                    type="employment",
+                    include=[{"id": "yoh", "bullets": ["nonexistent"]}],
+                )
+            ],
+        )
+        with pytest.raises(MissingContentIdError) as exc:
+            resolve_variant(pool, variant)
+        assert "yoh" in str(exc.value)
+        assert "nonexistent" in str(exc.value)
+
+    def test_duplicate_bullet_ids_raises(self) -> None:
+        pool = _minimal_pool()
+        variant = Variant(
+            variant="test",
+            sections=[
+                VariantSection(
+                    type="employment",
+                    include=[{"id": "yoh", "bullets": ["b1", "b1"]}],
+                )
+            ],
+        )
+        with pytest.raises(ValueError) as exc:
+            resolve_variant(pool, variant)
+        assert "duplicate" in str(exc.value).lower()
+        assert "b1" in str(exc.value)
+
+    def test_empty_bullets_list_gives_role_without_bullets(self) -> None:
+        pool = _minimal_pool()
+        variant = Variant(
+            variant="test",
+            sections=[
+                VariantSection(
+                    type="employment",
+                    include=[{"id": "yoh", "bullets": []}],
+                )
+            ],
+        )
+        result = resolve_variant(pool, variant)
+        assert result["employment"][0].role.bullets == []
+
+    def test_omitting_bullets_key_includes_all(self) -> None:
+        pool = _minimal_pool()
+        variant = Variant(
+            variant="test",
+            sections=[
+                VariantSection(
+                    type="employment",
+                    include=[{"id": "yoh"}],
+                )
+            ],
+        )
+        result = resolve_variant(pool, variant)
+        assert len(result["employment"][0].role.bullets) == 1
+        assert result["employment"][0].role.bullets[0].id == "b1"
+
+
+class TestCollapseFlag:
+    def test_collapse_flag_passed_through(self) -> None:
+        pool = _minimal_pool()
+        variant = Variant(
+            variant="test",
+            sections=[
+                VariantSection(
+                    type="employment",
+                    include=[{"id": "yoh", "collapse": True}],
+                )
+            ],
+        )
+        result = resolve_variant(pool, variant)
+        assert result["employment"][0].collapse is True
+
+    def test_mixed_collapse_and_normal(self) -> None:
+        pool = _minimal_pool()
+        variant = Variant(
+            variant="test",
+            sections=[
+                VariantSection(
+                    type="employment",
+                    include=[
+                        "yoh",
+                        {"id": "duck", "collapse": True},
+                    ],
+                )
+            ],
+        )
+        result = resolve_variant(pool, variant)
+        assert not result["employment"][0].collapse
+        assert result["employment"][1].collapse
+
+
+class TestSkillsSubsetting:
+    def test_subset_skill_items(self) -> None:
+        pool = _minimal_pool()
+        variant = Variant(
+            variant="test",
+            sections=[
+                VariantSection(
+                    type="skills",
+                    include=[{"id": "langs", "items": ["Python"]}],
+                )
+            ],
+        )
+        result = resolve_variant(pool, variant)
+        assert result["skills"][0].items == ["Python"]
+
+    def test_unknown_skill_item_raises(self) -> None:
+        pool = _minimal_pool()
+        variant = Variant(
+            variant="test",
+            sections=[
+                VariantSection(
+                    type="skills",
+                    include=[{"id": "langs", "items": ["Nonexistent"]}],
+                )
+            ],
+        )
+        with pytest.raises(ValueError) as exc:
+            resolve_variant(pool, variant)
+        assert "langs" in str(exc.value)
+        assert "Nonexistent" in str(exc.value)
+
+    def test_omitting_items_includes_all(self) -> None:
+        pool = _minimal_pool()
+        variant = Variant(
+            variant="test",
+            sections=[
+                VariantSection(
+                    type="skills",
+                    include=[{"id": "langs"}],
+                )
+            ],
+        )
+        result = resolve_variant(pool, variant)
+        assert result["skills"][0].items == ["Python"]
+
+    def test_mixed_string_and_object_skills(self) -> None:
+        pool = _minimal_pool()
+        variant = Variant(
+            variant="test",
+            sections=[
+                VariantSection(
+                    type="skills",
+                    include=["langs", {"id": "langs", "items": ["Python"]}],
+                )
+            ],
+        )
+        result = resolve_variant(pool, variant)
+        assert len(result["skills"]) == 2
+        assert result["skills"][0].items == ["Python"]  # full
+        assert result["skills"][1].items == ["Python"]  # subset (same here, pool only has 1)
+
+
+class TestInvalidIncludeTypes:
+    def test_employment_include_with_invalid_type_raises(self) -> None:
+        pool = _minimal_pool()
+        variant = Variant(
+            variant="test",
+            sections=[VariantSection(type="employment", include=[42])],
+        )
+        with pytest.raises(ValueError) as exc:
+            resolve_variant(pool, variant)
+        assert "string or object" in str(exc.value)
+
+    def test_skills_include_with_invalid_type_raises(self) -> None:
+        pool = _minimal_pool()
+        variant = Variant(
+            variant="test",
+            sections=[VariantSection(type="skills", include=[True])],
+        )
+        with pytest.raises(ValueError) as exc:
+            resolve_variant(pool, variant)
+        assert "string or object" in str(exc.value)
+
+
+class TestMixedIncludeEntries:
+    def test_mixed_string_and_object_employment(self) -> None:
+        pool = _minimal_pool()
+        variant = Variant(
+            variant="test",
+            sections=[
+                VariantSection(
+                    type="employment",
+                    include=[
+                        "yoh",
+                        {"id": "duck", "bullets": []},
+                    ],
+                )
+            ],
+        )
+        result = resolve_variant(pool, variant)
+        assert len(result["employment"]) == 2
+        assert len(result["employment"][0].role.bullets) == 1  # yoh: all
+        assert len(result["employment"][1].role.bullets) == 0  # duck: empty

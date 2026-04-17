@@ -51,7 +51,7 @@ class Bullet(_IdItem):
 
 
 class EmploymentRole(_IdItem):
-    dates: str = Field(min_length=1)
+    dates: Optional[str] = None
     company: str = Field(min_length=1)
     location: str = Field(min_length=1)
     title: str = Field(min_length=1)
@@ -115,9 +115,20 @@ class ContentPool(_StrictModel):
     referees: dict[str, Referee]
 
 
+class EmploymentSelector(_StrictModel):
+    id: str = Field(min_length=1)
+    bullets: Optional[list[str]] = None
+    collapse: bool = False
+
+
+class SkillSelector(_StrictModel):
+    id: str = Field(min_length=1)
+    items: Optional[list[str]] = None
+
+
 class VariantSection(_StrictModel):
     type: str = Field(min_length=1)
-    include: Optional[list[str]] = None
+    include: Optional[list] = None
     content_id: Optional[str] = None
 
 

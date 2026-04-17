@@ -1,15 +1,29 @@
 \begin{rubric}{Professional Experience}
+{% set ns = namespace(collapsed=[]) %}
+{% for entry in employment %}
+{% if not entry.collapse %}
 
-{% for role in employment %}
-\entry*[{{ role.dates }}]
-    \textbf{ {{- role.company | md_to_latex }} --- {{ role.location | md_to_latex -}} } \emph{ {{- role.title | md_to_latex -}} } \begin{itemize}
-{% for bullet in role.bullets %}
+\entry*[{{ entry.role.dates }}]
+    \textbf{ {{- entry.role.company | md_to_latex }} --- {{ entry.role.location | md_to_latex -}} } \emph{ {{- entry.role.title | md_to_latex -}} }
+{% if entry.role.bullets %}
+ \begin{itemize}
+{% for bullet in entry.role.bullets %}
         \item {{ bullet.text | md_to_latex }}
 {% if not loop.last %}
 
 {% endif %}
 {% endfor %}
     \end{itemize}
+{% endif %}
 
+{% else %}
+{% set _ = ns.collapsed.append(entry.role) %}
+{% endif %}
 {% endfor %}
+{% if ns.collapsed %}
+\entry*{Earlier employment history includes tenure as
+{%- for r in ns.collapsed %} {{ r.title | md_to_latex }}, {{ r.company | md_to_latex -}}
+{%- if not loop.last %}; {% else %}.{% endif %}
+{%- endfor %}}
+{% endif %}
 \end{rubric}

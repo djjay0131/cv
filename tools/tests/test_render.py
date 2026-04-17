@@ -81,8 +81,8 @@ def _setup_templates(base: Path) -> Path:
     _write(td / "summary.tex.j2", "SUMMARY: {{ summary.text | md_to_latex }}\n")
     _write(
         td / "employment.tex.j2",
-        "EMP:{% for r in employment %} {{ r.company }}"
-        "{% for b in r.bullets %} [{{ b.text | md_to_latex }}]{% endfor %}{% endfor %}\n",
+        "EMP:{% for entry in employment %} {{ entry.role.company }}"
+        "{% for b in entry.role.bullets %} [{{ b.text | md_to_latex }}]{% endfor %}{% endfor %}\n",
     )
     _write(
         td / "education.tex.j2",

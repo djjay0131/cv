@@ -24,8 +24,21 @@
   bullets:
     - id: dc-launch
       text: "Led first client launch on accelerated 3-month timeline with automated deployments to Azure Storage, Key Vault, Redis, and Docker."
+    - id: dc-launch-detailed
+      text: >-
+        Led customer through launch of 1st client on accelerated timeline of 3 months
+        with fully automated deployment to Azure Storage Services, Key Vault, Redis cache,
+        and Docker containers using a combination of ADO and Octopus Server, via Bash and
+        PowerShell scripts, working within the SaFe framework.
+    - id: dc-launch-short
+      text: "Participated in launch of 1st client on accelerated timeline of 3 months with fully automated deployment."
     - id: dc-integration
       text: "Designed end-to-end data integration/transformation across hybrid SaaS systems."
+    - id: dc-integration-detailed
+      text: >-
+        Architected robust and adaptive end-to-end data integration and data transformation
+        solutions, utilizing hybrid hosted single-node and shared SaaS applications with
+        integrations across multiple third-party applications and service providers.
     - id: dc-adf
       text: "Drove ADF implementation connecting Duck Creek data with customer Data Lakes."
     - id: dc-deployment
@@ -34,6 +47,19 @@
         eliminating **75%** of deployment issues.
     - id: dc-sev1
       text: "Developed Python algorithm to predict Sev 1 incidents from logs."
+    - id: dc-sev1-detailed
+      text: "Analyzed server logs and predicted Sev 1 cases through creation of AI algorithm written in Python, using scikit-learn."
+    - id: dc-pen-testing
+      text: "Coordinated in PEN testing and consulted on risk mitigation options for pre go-live security assessment."
+    - id: dc-sso
+      text: "Developed Azure Authentication flow for SSO integration into on-premise, cloud-hosted, and third-party applications."
+    - id: dc-upgrade-short
+      text: "Saved hundreds of hours by developing automated upgrade scripts for a 3-year-old Octopus instance."
+    - id: dc-upgrade-detailed
+      text: >-
+        Saved hundreds of hours of manual clicking by developing automated upgrade scripts
+        written in PowerShell for a 3-year-old Octopus instance and overseeing multiple
+        exception cases.
 
 - id: blackbaud-principal
   dates: "2016--2020"
@@ -50,12 +76,34 @@
       text: >-
         Cut deployment time and customer involvement by **50%** via DevOps
         scripting and YAML pipelines.
+    - id: bb-devops-detailed
+      text: >-
+        Reduced deployment time and customer involvement by **50%** by engineering DevOps
+        scripts for custom code deployment to Azure multi-tenant environments, standardizing
+        Azure pipelines using continuous deployment YAML scripts and NuGet artifact management,
+        and single package deployments.
     - id: bb-sla
       text: >-
         Met **100% SLA** for Tier 3 support, improving VB.NET, C#, and Java
         systems.
     - id: bb-sso
       text: "Designed SAML 2.0 SSO component; published REST APIs to Azure using Swagger-based codegen."
+    - id: bb-sso-detailed
+      text: >-
+        Boosted security and user administration by designing and implementing SSO component
+        for enterprise CRM product by utilizing SAML 2.0 protocol. Unilaterally designed
+        all SAML plug-ins.
+    - id: bb-rest-api
+      text: "Enabled automation generation and publication of APIs to Azure by constructing REST Web Services for enterprise product API and framework using Swagger Code Generation CLIs."
+    - id: bb-cd-process
+      text: >-
+        Finalized DevOps continuous deployment process for customer application software
+        development by automating delivery of component software library and customer-specific
+        integration code into single deployment package.
+    - id: bb-training
+      text: "Enhanced staff development and performance by training and leading junior staff members."
+    - id: bb-angular-tool
+      text: "Collaborated with Microsoft consultants to build fully customizable bulk import tool using Angular, Node.JS, and HTML 5.0."
 
 - id: blackbaud-solutions
   dates: "2011--2016"
@@ -71,6 +119,12 @@
         timelines by **50%**.
     - id: bb-sa-azure
       text: "Built Azure environments for development and CI/CD."
+    - id: bb-sa-atlassian
+      text: "Devised cohesive view of implementation projects across business unit with consistent issue tracking system through execution of Atlassian suite of tools to decrease project overruns."
+    - id: bb-sa-data-migration
+      text: "Steered enterprise data migration projects for client with 10M+ constituents and 1B+ records across US and European Union, ensuring compliance with national data laws."
+    - id: bb-sa-conversion
+      text: "Conducted deep-dive on existing data conversion processes and executed improvement plan by generating automated Validation Scripts in SQL Server and automating the iterative conversion process."
 
 - id: djjaynet-consultant
   dates: "2005--2011"
@@ -82,3 +136,66 @@
       text: "Integrated user interfaces with Crestron touch hardware using custom .NET controls."
     - id: dj-ef
       text: "Implemented REST APIs with Entity Framework and C#."
+    - id: dj-trump-towers
+      text: "Created back-end REST API for multi-dwelling concierge system in Trump Towers South Beach via utilization of C# .NET."
+
+- id: limeleap-chief-engineer
+  dates: "2002--2011"
+  company: "LimeLeap Solutions"
+  location: "Washington, DC"
+  title: "Chief Engineer"
+  bullets:
+    - id: ll-agile
+      text: "Improved on-time deliveries to almost **100%** by transitioning development teams from structured waterfall models to an agile team utilizing Scrum methodology."
+    - id: ll-product-transition
+      text: "Promoted to assist with transitioning organization from custom product development to a product company."
+    - id: ll-tfs
+      text: "Fully integrated project management tracking with TFS and utilized ASP.NET to generate a REST API for core product platform."
+    - id: ll-standardized
+      text: "Standardized new product implementation and liaised between product development and implementation."
+
+- id: limeleap-director-productivity
+  dates: "2002--2011"
+  company: "LimeLeap Solutions"
+  location: "Washington, DC"
+  title: "Director of Productivity Solutions"
+  bullets: []
+
+- id: limeleap-team-leader
+  dates: "2002--2011"
+  company: "LimeLeap Solutions"
+  location: "Washington, DC"
+  title: "Team Leader"
+  bullets: []
+
+- id: limeleap-senior-se
+  dates: "2002--2011"
+  company: "LimeLeap Solutions"
+  location: "Washington, DC"
+  title: "Senior Software Engineer"
+  bullets: []
+
+- id: limeleap-developer
+  dates: "2002--2011"
+  company: "LimeLeap Solutions"
+  location: "Washington, DC"
+  title: "Software Developer"
+  bullets: []
+
+- id: ncmec-web-consultant
+  company: "NCMEC"
+  location: "Alexandria, VA"
+  title: "Web Applications Consultant"
+  bullets: []
+
+- id: force-inc-writer
+  company: "Force, Inc."
+  location: "Washington, DC"
+  title: "Technical Writer"
+  bullets: []
+
+- id: at-kearney-designer
+  company: "A.T. Kearney"
+  location: "Washington, DC"
+  title: "Graphics Designer"
+  bullets: []
