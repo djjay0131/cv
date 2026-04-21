@@ -1,6 +1,6 @@
 # Feature: Add Paper Skill + Stricter Bib Lint
 
-**Status:** SPECIFIED
+**Status:** IMPLEMENTED
 **Date:** 2026-04-20
 **Author:** Feature Architect (AI-assisted)
 
