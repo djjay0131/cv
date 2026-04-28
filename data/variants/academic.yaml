@@ -6,6 +6,7 @@ sections:
 
   - type: employment
     include:
+      - vt-gra-mrs
       - yoh-adf-architect
       - duck-creek-architect
       - blackbaud-principal

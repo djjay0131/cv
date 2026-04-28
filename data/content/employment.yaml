@@ -1,3 +1,27 @@
+- id: vt-gra-mrs
+  dates: "April 2026--Present"
+  company: "Virginia Tech"
+  location: "Blacksburg, VA"
+  title: "Graduate Research Assistant -- ARCADE Lab (PI: Dr. Afsari)"
+  bullets:
+    - id: vt-gra-mrs-overview
+      text: >-
+        Deploying cloud infrastructure for the **Multi Robot System (MRS)**
+        for Remote Construction Progress Monitoring, including network
+        architecture, mesh VPN, REST API, and Web UI.
+    - id: vt-gra-mrs-iac
+      text: >-
+        Built Terraform-based Infrastructure-as-Code and CI/CD pipelines for
+        repeatable environment provisioning and deployment.
+    - id: vt-gra-mrs-security
+      text: >-
+        Hardened the platform with 2FA on the Web UI, secured video streaming,
+        and instrumented audit logging across services.
+    - id: vt-gra-mrs-reliability
+      text: >-
+        Stabilized robot connection leases and improved Web UI performance
+        under sustained streaming load.
+
 - id: yoh-adf-architect
   dates: "2024--2025"
   company: "Yoh, A Day & Zimmerman Company"
