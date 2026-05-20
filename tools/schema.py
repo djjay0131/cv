@@ -8,7 +8,7 @@ file and field context so broken data never reaches the Jinja layer.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
+from typing import Literal, Optional
 
 import yaml
 from pydantic import BaseModel, ConfigDict, Field, field_validator
@@ -126,6 +126,11 @@ class SkillSelector(_StrictModel):
     items: Optional[list[str]] = None
 
 
+class VariantTheme(_StrictModel):
+    style: Literal["classic", "refined-serif"] = "classic"
+    photo: bool = True
+
+
 class VariantSection(_StrictModel):
     type: str = Field(min_length=1)
     include: Optional[list] = None
@@ -143,6 +148,9 @@ class RawOverride(BaseModel):
 class Variant(_StrictModel):
     variant: str = Field(min_length=1)
     extends: Optional[str] = None
+    label: Optional[str] = None
+    description: Optional[str] = None
+    theme: VariantTheme = Field(default_factory=VariantTheme)
     sections: list[VariantSection] = Field(min_length=1)
     raw_overrides: dict[str, RawOverride] = Field(default_factory=dict)
 

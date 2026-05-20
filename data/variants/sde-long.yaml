@@ -1,4 +1,6 @@
 variant: sde-long
+label: "Software Engineer"
+description: "Detailed software-engineering resume emphasizing platform architecture and delivery."
 
 sections:
   - type: summary

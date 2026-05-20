@@ -1,10 +1,14 @@
-variant: academic
-label: "Academic CV"
-description: "Full curriculum vitae with publications, research, and complete employment history."
+variant: research-professional
+label: "Research Professional"
+description: "Research-focused resume for industry R&D and applied-research roles."
+
+theme:
+  style: refined-serif
+  photo: false
 
 sections:
   - type: summary
-    content_id: academic
+    content_id: research-professional
 
   - type: employment
     include:

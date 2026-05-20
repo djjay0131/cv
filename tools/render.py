@@ -57,6 +57,16 @@ def _render_preamble(resolved: dict) -> str:
     return f"\\mynames{{{entries}}}\n"
 
 
+def _render_theme(variant) -> str:
+    """Build a LaTeX fragment declaring the variant's theme style + photo flag.
+
+    cv-llt.tex \\input's this file before \\begin{document} and dispatches on
+    \\cvtheme / \\cvphoto via \\ifdefstring.
+    """
+    photo = "true" if variant.theme.photo else "false"
+    return f"\\def\\cvtheme{{{variant.theme.style}}}\n\\def\\cvphoto{{{photo}}}\n"
+
+
 def render(
     variant_name: str,
     *,
@@ -87,6 +97,9 @@ def render(
 
     # Write preamble (name variants → \mynames).
     (output_dir / "_preamble.tex").write_text(_render_preamble(resolved), encoding="utf-8")
+
+    # Write theme fragment (\cvtheme + \cvphoto for cv-llt.tex to dispatch on).
+    (output_dir / "_theme.tex").write_text(_render_theme(variant), encoding="utf-8")
 
     env = _build_env(Path(templates_dir))
     overrides = variant.raw_overrides or {}

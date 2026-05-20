@@ -1,0 +1,60 @@
+%% themes/refined-serif.sty -- refined editorial-modern theme for the CV pipeline.
+%%
+%% Loaded by cv-llt.tex when \cvtheme = "refined-serif". Sits on top of
+%% settings.sty and overrides only the theme-able elements (colours, the swish
+%% rubric head, the section heading font). Body font (Cochineal serif) is
+%% inherited; small caps come from Cochineal's OpenType `smcp` feature.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{themes/refined-serif}[2026/05/19 refined serif CV theme]
+
+%% Fail loud if curve.cls renames its private rubric-head macro. Better to
+%% halt the build with a clear error than to silently emit broken output.
+%% (EC-11 in llm/features/research-professional-variant.md.)
+\ifdefined\@@rubrichead\else
+  \PackageError{themes/refined-serif}%
+    {curve internal \string\@@rubrichead\space missing -- theme needs updating}%
+    {curve.cls may have been updated; the refined-serif theme's section-head
+     override depends on this internal. Patch the theme to track the new API.}%
+\fi
+
+%% Two-colour scheme:
+%%   MarkerColour      -- navy, used for STRUCTURAL accents:
+%%                        section heading rule + heading text,
+%%                        header contact icons (\makefield),
+%%                        circled bib numbers (\circled).
+%%   MarkerMutedColour -- grey, used for INLINE BODY accents:
+%%                        bullet prefix marker (\prefix),
+%%                        DOI/URL link glyphs in publications.
+\definecolor{SwishLineColour}{HTML}{22364F}
+\definecolor{MarkerColour}{HTML}{22364F}
+\definecolor{MarkerMutedColour}{HTML}{555555}
+
+%% Serif small-caps section headings -- drop the \sffamily that settings.sty
+%% sets in the classic look. Cochineal provides true small caps via \scshape.
+\rubricfont{\large\bfseries\scshape}
+\subrubricfont{\normalsize\scshape}
+
+%% Replace the gradient "swish" rubric head with a flat thin navy rule.
+\renewcommand\@@rubrichead[1]{%
+  {\@rubricfont\color{MarkerColour}#1}\par
+  \vskip 1.5pt
+  {\color{MarkerColour}\hrule height 0.6pt}%
+  \vspace\rubricspace%
+}
+
+%% Re-tint the inline body accents to the muted grey, overriding the
+%% MarkerColour-derived defaults that settings.sty wires in.
+\prefix{%
+  \hspace*{-1ex}%
+  \color{MarkerMutedColour}\@prefixmarker%
+  \hspace*{1ex}%
+}
+
+%% DOI/URL link glyphs in the publication list: replace settings.sty's
+%% MarkerColour!80!black formatting with the muted grey.
+\DeclareFieldFormat{doi}{%
+  \textcolor{MarkerMutedColour}{\scriptsize\faLink}\,%
+  \url{https://doi.org/#1}}
+\DeclareFieldFormat{url}{%
+  \textcolor{MarkerMutedColour}{\scriptsize\faLink}\,%
+  \url{#1}}

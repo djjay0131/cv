@@ -39,11 +39,29 @@ jobs:
       - name: Ruff check
         run: ruff check .
 
-  build:
-    name: Render + compile PDF + publish artifacts
+  configure:
+    name: Discover variants
     needs: tests
     runs-on: ubuntu-24.04
     if: github.event_name != 'pull_request'
+    outputs:
+      variants: ${{ steps.list.outputs.variants }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: list
+        run: |
+          json=$(ls data/variants/*.yaml | xargs -n1 basename | sed 's/\.yaml$//' | jq -R . | jq -sc .)
+          echo "variants=$json" >> "$GITHUB_OUTPUT"
+          echo "Variants: $json"
+
+  build:
+    name: Compile ${{ matrix.variant }}
+    needs: configure
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: true     # one variant fails -> halt the whole release.
+      matrix:
+        variant: ${{ fromJSON(needs.configure.outputs.variants) }}
     steps:
       - uses: actions/checkout@v4
 
@@ -58,27 +76,92 @@ jobs:
           pip install pyyaml jinja2 pydantic bibtexparser
 
       - name: Render LaTeX fragments
-        run: python -m tools.render academic
+        run: python -m tools.render "${{ matrix.variant }}"
 
       - name: Compile PDF
         uses: xu-cheng/latex-action@v3
         with:
           root_file: cv-llt.tex
           latexmk_use_xelatex: true
-          args: "-interaction=nonstopmode -halt-on-error -usepretex=\\def\\cvvariant{academic} -jobname=academic"
+          args: "-interaction=nonstopmode -halt-on-error -usepretex=\\def\\cvvariant{${{ matrix.variant }}} -jobname=${{ matrix.variant }}"
 
-      - name: Prepare data artifact
+      - name: Install pdftoppm + ImageMagick for visual regression
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils imagemagick
+
+      - name: Visual-regression diff against committed baseline
+        run: |
+          set -e
+          v="${{ matrix.variant }}"
+          tolerance="${VR_TOLERANCE:-0}"
+          baseline_dir="tests/baselines/$v"
+          if [ ! -d "$baseline_dir" ]; then
+            echo "::warning::no baseline for $v at $baseline_dir -- skipping diff (commit a baseline to enable)"
+            exit 0
+          fi
+          mkdir -p "dist/vr/$v"
+          pdftoppm -r 150 "$v.pdf" "dist/vr/$v/page" -png
+          fail=0
+          for new_page in dist/vr/$v/page-*.png; do
+            name=$(basename "$new_page")
+            base="$baseline_dir/$name"
+            if [ ! -f "$base" ]; then
+              echo "::error::baseline missing: $base"
+              fail=1
+              continue
+            fi
+            diff_count=$(compare -metric AE "$base" "$new_page" "dist/vr/$v/diff-$name" 2>&1 || true)
+            echo "$v $name: $diff_count pixels differ"
+            if [ "$diff_count" -gt "$tolerance" ] 2>/dev/null; then
+              fail=1
+            fi
+          done
+          if [ "$fail" -ne 0 ]; then
+            echo "::error::visual regression detected for $v -- see dist/vr/$v/diff-*.png"
+            exit 1
+          fi
+
+      - name: Stage variant PDF
         run: |
           mkdir -p dist
-          cp academic.pdf dist/academic.pdf
+          cp "${{ matrix.variant }}.pdf" "dist/${{ matrix.variant }}.pdf"
+
+      - name: Upload per-variant artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: variant-${{ matrix.variant }}
+          path: |
+            dist/${{ matrix.variant }}.pdf
+            dist/vr/**
+          retention-days: 30
+
+  publish:
+    name: Publish release + cv-data
+    needs: build
+    runs-on: ubuntu-24.04
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all variant artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: variant-*
+          merge-multiple: true
+
+      - name: Stage release files
+        run: |
+          mkdir -p dist
+          find artifacts -name "*.pdf" -exec cp {} dist/ \;
+          ls -la dist/
           zip -r dist/cv-data.zip data own-bib.bib photo_jason_1.jpeg
 
-      - name: Upload workflow artifacts
+      - name: Upload combined workflow artifact
         uses: actions/upload-artifact@v4
         with:
           name: cv-${{ github.sha }}
           path: |
-            dist/academic.pdf
+            dist/*.pdf
             dist/cv-data.zip
           retention-days: 30
 
@@ -89,7 +172,7 @@ jobs:
           name: "Latest CV build"
           body: "Automated build from ${{ github.sha }}."
           files: |
-            dist/academic.pdf
+            dist/*.pdf
             dist/cv-data.zip
           make_latest: "true"
           prerelease: false

@@ -19,6 +19,7 @@ from tools.schema import (
     SkillGroup,
     Variant,
     VariantSection,
+    VariantTheme,
     load_content,
     load_variant,
 )
@@ -186,6 +187,50 @@ class TestVariant:
     def test_empty_sections_raises(self) -> None:
         with pytest.raises(ValidationError):
             Variant(variant="academic", sections=[])
+
+    def test_theme_defaults_to_classic_with_photo(self) -> None:
+        v = Variant(
+            variant="academic",
+            sections=[VariantSection(type="summary", content_id="s-a")],
+        )
+        assert v.theme.style == "classic"
+        assert v.theme.photo is True
+
+    def test_theme_refined_serif_no_photo(self) -> None:
+        v = Variant(
+            variant="research-professional",
+            theme=VariantTheme(style="refined-serif", photo=False),
+            sections=[VariantSection(type="summary", content_id="s-a")],
+        )
+        assert v.theme.style == "refined-serif"
+        assert v.theme.photo is False
+
+    def test_theme_unknown_style_rejected(self) -> None:
+        with pytest.raises(ValidationError) as exc:
+            Variant(
+                variant="x",
+                theme={"style": "brutalist"},
+                sections=[VariantSection(type="summary", content_id="s-a")],
+            )
+        assert "brutalist" in str(exc.value) or "style" in str(exc.value)
+
+    def test_label_and_description_optional(self) -> None:
+        v = Variant(
+            variant="academic",
+            label="Academic CV",
+            description="Full curriculum vitae.",
+            sections=[VariantSection(type="summary", content_id="s-a")],
+        )
+        assert v.label == "Academic CV"
+        assert v.description == "Full curriculum vitae."
+
+    def test_label_and_description_default_none(self) -> None:
+        v = Variant(
+            variant="academic",
+            sections=[VariantSection(type="summary", content_id="s-a")],
+        )
+        assert v.label is None
+        assert v.description is None
 
 
 class TestLoadContent:
