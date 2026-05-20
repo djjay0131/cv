@@ -2,7 +2,10 @@ name: build-cv
 
 on:
   push:
-    branches: [master]
+    # Run on all branches so feature work validates the matrix build before
+    # merging. The publish job is gated to master, so feature pushes test
+    # but don't ship.
+    branches-ignore: []
     paths-ignore:
       - "llm/**"
       - "**/*.md"
@@ -43,7 +46,6 @@ jobs:
     name: Discover variants
     needs: tests
     runs-on: ubuntu-24.04
-    if: github.event_name != 'pull_request'
     outputs:
       variants: ${{ steps.list.outputs.variants }}
     steps:
