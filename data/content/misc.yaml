@@ -1,4 +1,10 @@
 awards:
+  - id: phi-kappa-phi
+    dates: "May 2026"
+    text: "**Phi Kappa Phi**, inducted member --- national honor society recognizing academic excellence across all disciplines."
+  - id: omicron-delta-kappa
+    dates: "May 2026"
+    text: "**Omicron Delta Kappa**, inducted member --- national leadership honor society."
   - id: limeleap-cs-award
     dates: "2008"
     text: "**Customer Service Award**, LimeLeap Professional Services."

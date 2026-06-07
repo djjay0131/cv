@@ -162,6 +162,47 @@ def test_preamble_file_written_with_name_variants(tmp_path: Path) -> None:
     assert r"\mynames{Cusati/Jason}" in preamble
 
 
+def test_theme_file_written_with_defaults(tmp_path: Path) -> None:
+    content_dir = _setup_content(tmp_path)
+    variants_dir = _setup_variant(tmp_path)
+    templates_dir = _setup_templates(tmp_path)
+    output_dir = tmp_path / "out"
+
+    render(
+        "academic",
+        content_dir=content_dir,
+        variants_dir=variants_dir,
+        templates_dir=templates_dir,
+        output_dir=output_dir,
+    )
+
+    theme = (output_dir / "_theme.tex").read_text()
+    assert r"\def\cvtheme{classic}" in theme
+    assert r"\def\cvphoto{true}" in theme
+
+
+def test_theme_file_written_for_refined_serif_no_photo(tmp_path: Path) -> None:
+    content_dir = _setup_content(tmp_path)
+    variants_dir = _setup_variant(
+        tmp_path,
+        overrides="theme:\n  style: refined-serif\n  photo: false\n",
+    )
+    templates_dir = _setup_templates(tmp_path)
+    output_dir = tmp_path / "out"
+
+    render(
+        "academic",
+        content_dir=content_dir,
+        variants_dir=variants_dir,
+        templates_dir=templates_dir,
+        output_dir=output_dir,
+    )
+
+    theme = (output_dir / "_theme.tex").read_text()
+    assert r"\def\cvtheme{refined-serif}" in theme
+    assert r"\def\cvphoto{false}" in theme
+
+
 def test_raw_override_bypasses_template(tmp_path: Path) -> None:
     content_dir = _setup_content(tmp_path)
     variants_dir = _setup_variant(

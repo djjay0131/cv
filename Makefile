@@ -11,7 +11,7 @@
 
 PY       := .venv/bin/python
 PYTEST   := .venv/bin/pytest
-VARIANTS := academic
+VARIANTS := $(basename $(notdir $(wildcard data/variants/*.yaml)))
 
 BUILD_DIR      = build/$(1)
 TEX_FRAGMENTS  = $(BUILD_DIR)/tex
