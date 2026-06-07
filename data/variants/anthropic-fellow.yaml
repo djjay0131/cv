@@ -1,0 +1,54 @@
+variant: anthropic-fellow
+label: "Anthropic Fellow application"
+description: "Researcher CV targeting the Anthropic Fellows Program: alignment, mech-interp, and secure-software depth."
+
+theme:
+  style: refined-serif
+  photo: false
+
+sections:
+  - type: summary
+    content_id: fellowship
+
+  - type: employment
+    include:
+      - vt-gra-mrs
+      - id: yoh-adf-architect
+        bullets: [yoh-llm, yoh-api]
+      - id: duck-creek-architect
+        bullets: [dc-sev1, dc-pen-testing]
+      - id: blackbaud-principal
+        collapse: true
+      - id: blackbaud-solutions
+        collapse: true
+      - id: djjaynet-consultant
+        collapse: true
+
+  - type: education
+    include:
+      - phd-cs-vt
+      - meng-cs-vt
+      - bs-econ-vt
+
+  - type: projects
+    include:
+      - llm-coding-assistant
+      - security-classifier
+      - sentiment-yelp
+      - nfl-ml
+
+  - type: publications
+
+  - type: skills
+    include:
+      - ai-ml
+      - id: languages
+        items: [Python, C#, Java, JavaScript, Bash, PowerShell, T-SQL, "C++", Node.js]
+      - id: tools
+        items: [Azure, AWS, Docker, FastAPI, Streamlit, PostgreSQL, "SQL Server", VS Code, PyCharm, Wireshark]
+      - platforms
+
+  - type: misc
+
+  - type: referee
+    content_id: available
