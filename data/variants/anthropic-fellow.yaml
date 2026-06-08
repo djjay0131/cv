@@ -12,6 +12,7 @@ sections:
 
   - type: employment
     include:
+      - vt-doctoral-research
       - vt-gra-mrs
       - id: yoh-adf-architect
         bullets: [yoh-llm, yoh-api]
@@ -32,10 +33,11 @@ sections:
 
   - type: projects
     include:
+      - agentic-kg
+      - construction-ai
+      - vvuq-beam-solver
       - llm-coding-assistant
       - security-classifier
-      - sentiment-yelp
-      - nfl-ml
 
   - type: publications
 

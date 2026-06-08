@@ -1,3 +1,44 @@
+- id: vt-doctoral-research
+  dates: "2024 -- Present"
+  company: "Virginia Tech"
+  location: "Blacksburg, VA"
+  title: "Doctoral Researcher --- Software Engineering with AI/ML/MI"
+  bullets:
+    - id: vt-research-agentic-kg
+      text: >-
+        Designing **agentic knowledge graphs for research progression**:
+        an orchestrated agent system (Navigator / Extractor / Continuation)
+        over a research KG modeling problems, assumptions, constraints,
+        evidence spans, datasets, and metrics. Live API + UI on Google
+        Cloud Run; Denario-based agent framework; Python / FastAPI.
+    - id: vt-research-construction-ai
+      text: >-
+        Building **Construction-AI**: an LLM- and KG-backed material
+        takeoff and cut-list optimization platform that parses
+        architectural drawings (DWG / DXF / PDF), extracts geometry, and
+        produces JSON material takeoffs with CAD visualizations. Phase 1
+        MVP shipped (wall / stud / plate calculation, FastAPI + React);
+        proposal extends to YOLOv8 object detection, LLM-driven
+        interpretation, and OR-Tools optimization.
+    - id: vt-research-vvuq
+      text: >-
+        Coauthored **Verification, Validation, and Predictive
+        Uncertainty Quantification of an Euler--Bernoulli Beam
+        Finite-Difference Model** (AOE/CS/ME 6444, Spring 2026; advisor
+        Dr.\ Christopher Roy; coauthor Cheng-Shun Chuang) --- planned
+        extension into a reusable VVUQ framework for engineering
+        simulation.
+    - id: vt-research-mech-interp
+      text: >-
+        Self-directed study of **mechanistic interpretability** via Neel
+        Nanda's ARENA curriculum and TransformerLens; hand-built a small
+        transformer to ground-truth circuit-level claims.
+    - id: vt-research-knowledge-accumulation
+      text: >-
+        Two-paper line on evidence accumulation in software engineering
+        research (**ICSE 2026** + arXiv preprint), advised by Dr.\ Chris
+        Brown.
+
 - id: vt-gra-mrs
   dates: "April 2026 -- May 2026"
   company: "Virginia Tech"
