@@ -16,3 +16,16 @@
     engineering, security classification, and mechanistic interpretability.
     Published at ICSE 2026, with hands-on depth in ML pipelines, evaluation design,
     and the engineering rigor that industry R&D depends on.
+
+- id: fellowship
+  text: >-
+    PhD candidate in Computer Science (SE with AI/ML/MI) at Virginia Tech, focused on
+    the empirical methodology of evaluating LLM behavior and accumulating verifiable
+    safety claims. Two papers on evidence-based reasoning in GenAI tools and knowledge
+    accumulation in software engineering research (**ICSE 2026**; arXiv preprint).
+    Background combines hands-on ML/LLM application work --- LLM-assisted code generation,
+    ML-driven incident prediction, behavioral evals --- with **20+ years of secure-software
+    delivery** (CSSLP-certified, recent mesh-VPN/2FA platform hardening at Virginia
+    Tech's ARCADE Lab). Currently studying mechanistic interpretability via Neel Nanda's
+    curriculum and TransformerLens. Seeking to bring an empirical-claims-and-evidence
+    methodology to alignment research at Anthropic.
