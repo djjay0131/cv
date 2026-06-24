@@ -197,7 +197,7 @@
   dates: "2002--2011"
   company: "LimeLeap Solutions"
   location: "Washington, DC"
-  title: "Chief Engineer"
+  title: "Chief Architect"
   bullets:
     - id: ll-agile
       text: "Improved on-time deliveries to almost **100%** by transitioning development teams from structured waterfall models to an agile team utilizing Scrum methodology."
@@ -212,7 +212,7 @@
   dates: "2002--2011"
   company: "LimeLeap Solutions"
   location: "Washington, DC"
-  title: "Director of Productivity Solutions"
+  title: "Director of Professional Services"
   bullets: []
 
 - id: limeleap-team-leader

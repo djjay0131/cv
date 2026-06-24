@@ -24,6 +24,10 @@ sections:
         collapse: true
       - id: djjaynet-consultant
         collapse: true
+      - id: limeleap-chief-engineer
+        collapse: true
+      - id: limeleap-director-productivity
+        collapse: true
 
   - type: education
     include:
