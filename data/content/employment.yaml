@@ -28,17 +28,6 @@
         Dr.\ Christopher Roy; coauthor Cheng-Shun Chuang) --- planned
         extension into a reusable VVUQ framework for engineering
         simulation.
-    - id: vt-research-mech-interp
-      text: >-
-        Self-directed study of **mechanistic interpretability** with
-        TransformerLens; hand-built a small transformer to ground-truth
-        circuit-level claims on toy tasks.
-    - id: vt-research-knowledge-accumulation
-      text: >-
-        Two-paper line on evidence accumulation in software engineering
-        research (**ICSE 2026** + arXiv preprint), advised by Dr.\ Chris
-        Brown.
-
 - id: vt-gra-mrs
   dates: "April 2026 -- May 2026"
   company: "Virginia Tech"
