@@ -74,8 +74,8 @@ Every field from the Airtable form, with delivery plan:
 | Motivation | Accept FT % | Y | **DRAFT below** — 100% with framing |
 | Motivation | Continue safety % | Y | **DRAFT below** — 100% with framing |
 | References | R1: Dr. Chris Brown | Y | **DRAFT below** |
-| References | R2: Dr. Burcin Afsari | Y | **DRAFT below** |
-| References | R3: TBD | Y | **OQ-3** — Jason to identify |
+| References | R2: Dr. Kereshmeh Afsari (keresh@vt.edu) | Y | **DRAFT below** |
+| References | R3: Dave Hollander (davidhollander@gmail.com) | Y | **DRAFT below** |
 | References | Additional refs | N | Skip unless an obvious 4th surfaces |
 | Logistics | Cohort | Y | July 20, 2026 |
 | Logistics | Other timelines/deadlines | N | Skip unless something arises |
@@ -153,8 +153,8 @@ Add to `data/content/summaries.yaml`:
 ### References
 
 - **R1: Dr. Chris Brown** (Virginia Tech) — coauthor on both papers (ICSE 2026 + arXiv 2024). Email: TBD by user. **Background**: VT CS faculty; has Google Scholar; co-PI'd both publications. **Relationship**: ~2 years collaboration on empirical SE research, including paper drafting and review. Closest research collaborator.
-- **R2: Dr. Burcin Afsari** (Virginia Tech) — PI of ARCADE Lab; supervised the just-completed (April–May 2026) GRA work on the MRS robotics platform. **Background**: VT faculty; PI of ARCADE Lab focused on construction robotics and remote sensing systems. **Relationship**: 2-month direct supervision on platform deployment, security hardening, and reliability work. Can speak to shipping-velocity and engineering judgment.
-- **R3: Yoh senior** (specific name + email TBD by user) — chosen to give the references slate an industry-ML execution voice that R1 (Chris Brown, academic-research) and R2 (Burcin Afsari, academic-engineering) don't provide. Two-academic + one-industry reads stronger for an industry-research fellowship than three academic refs.
+- **R2: Dr. Kereshmeh Afsari** (Virginia Tech, keresh@vt.edu) — PI of ARCADE Lab; supervised the just-completed (April–May 2026) GRA work on the MRS robotics platform. **Background**: VT faculty; PI of ARCADE Lab focused on construction robotics and remote sensing systems. **Relationship**: 2-month direct supervision on platform deployment, security hardening, and reliability work. Can speak to shipping-velocity and engineering judgment.
+- **R3: Dave Hollander** (davidhollander@gmail.com) — senior collaborator from the Yoh / Core Specialty Insurance engagement. Adds an industry-ML execution voice that R1 (Chris Brown, academic-research) and R2 (Kereshmeh Afsari, academic-engineering) don't provide. Two-academic + one-industry reads stronger for an industry-research fellowship than three academic refs.
 
 User should email-warn all three the day of submission (Anthropic reaches out without notice; warning references is professional courtesy and avoids surprise non-responses).
 
@@ -279,23 +279,23 @@ This benefits the academic variant too (the "Present" claim becomes false May 20
 #### Reference 1: Dr. Chris Brown
 
 - **Name:** Chris Brown
-- **Email:** *(TBD — user to fill)*
+- **Email:** dcbrown@vt.edu
 - **Background:** *Assistant Professor of Computer Science, Virginia Tech. Researches empirical software engineering, developer experience, and human factors in software development. Google Scholar: [link TBD]. VT faculty page: [link TBD].*
 - **Relationship:** *Coauthor on two papers (Cusati & Brown, "Exploring the Evidence-Based SE Beliefs of Generative AI Tools," arXiv:2407.13900, 2024; and Cusati & Brown, "From Papers to Progress: Rethinking Knowledge Accumulation in Software Engineering," ICSE 2026). Approximately two years of close collaboration including study design, data analysis, paper drafting, and revision. He can speak to my research-execution velocity, methodological rigor, and ability to push empirical SE work to publication.*
 
-#### Reference 2: Dr. Burcin Afsari
+#### Reference 2: Dr. Kereshmeh Afsari
 
-- **Name:** Burcin Afsari *(verify spelling)*
-- **Email:** *(TBD — user to fill)*
+- **Name:** Kereshmeh Afsari
+- **Email:** keresh@vt.edu
 - **Background:** *Faculty at Virginia Tech; PI of the ARCADE Lab focused on construction robotics, remote sensing, and autonomous systems for built-environment monitoring. VT faculty page: [link TBD].*
 - **Relationship:** *Direct supervisor on a Graduate Research Assistantship from April 2026 to May 2026 (Spring semester) on the Multi Robot System (MRS) for Remote Construction Progress Monitoring project. I led cloud deployment, network architecture (mesh VPN), Terraform IaC, REST API + Web UI development, 2FA / video-streaming hardening, and audit logging across services. She can speak to shipping velocity on a real autonomous-systems platform, security judgment under production constraints, and ability to deliver an end-to-end deployment in a compressed timeframe.*
 
-#### Reference 3: Yoh senior collaborator *(specific person TBD by user)*
+#### Reference 3: Dave Hollander
 
-- **Name:** *(user to identify — a senior collaborator from the Yoh / Core Specialty Insurance engagement who watched the LLM-assisted ADF mapping + Streamlit/Data Ingestion API work ship)*
-- **Email:** *(TBD)*
-- **Background:** *Senior engineer/lead at Yoh or Core Specialty Insurance.*
-- **Relationship:** *Direct collaborator during the 2024--2025 ADF Solution Architect engagement. Witnessed the LLM-prototyping work, the Streamlit + Data Ingestion API delivery, and Jason's day-to-day execution on a real production data platform. Chosen over a second VT faculty member because it adds an industry-ML execution voice to a references slate otherwise weighted toward academic-research (Chris Brown) and academic-engineering (Burcin Afsari).*
+- **Name:** Dave Hollander
+- **Email:** davidhollander@gmail.com
+- **Background:** *Senior collaborator from the Yoh / Core Specialty Insurance engagement.*
+- **Relationship:** *Direct collaborator during the 2024--2025 ADF Solution Architect engagement. Witnessed the LLM-prototyping work, the Streamlit + Data Ingestion API delivery, and Jason's day-to-day execution on a real production data platform. Chosen over a second VT faculty member because it adds an industry-ML execution voice to a references slate otherwise weighted toward academic-research (Chris Brown) and academic-engineering (Kereshmeh Afsari).*
 
 ### Logistics — short answers
 
@@ -481,7 +481,7 @@ All OQs resolved 2026-06-06. Remaining user actions tracked under **Outstanding 
 
 - **OQ-1** *(resolved)*: Never applied to Anthropic/MATS/Astra/Fellows; never interviewed.
 - **OQ-2** *(resolved)*: Google Scholar profile exists: https://scholar.google.com/citations?user=TPwNZK4AAAAJ&hl=en
-- **OQ-3** *(resolved)*: R3 = a Yoh senior collaborator from the Core Specialty Insurance engagement. Adds an industry-ML execution voice that R1+R2 (both academic faculty) don't provide. **User to identify the specific person + email.**
+- **OQ-3** *(resolved)*: R3 = **Dave Hollander** (davidhollander@gmail.com), senior collaborator from the Yoh / Core Specialty Insurance engagement. Adds an industry-ML execution voice that R1+R2 (both academic faculty) don't provide.
 - **OQ-4** *(resolved)*: How heard = recommended by PhD advisor Dr. Chris Brown (Virginia Tech).
 - **OQ-5** *(resolved)*: Marketing opt-in = Yes; Refer-to-other-orgs = Yes.
 - **OQ-6** *(resolved)*: Workspace preference stays "Berkeley: 25%+", with explanation noting 25--50% expected and full-on-site acceptable if mentor matching requires.
@@ -492,9 +492,9 @@ All OQs resolved 2026-06-06. Remaining user actions tracked under **Outstanding 
 
 These are the only items still blocking submission:
 
-- Identify R3 (Yoh senior collaborator) — name + email.
-- Supply R1 (Chris Brown) email.
-- Supply R2 (Burcin Afsari) email; verify spelling.
+- ~~Identify R3 (Yoh senior collaborator) — name + email.~~ ✅ **Dave Hollander, davidhollander@gmail.com** (2026-06-30)
+- ~~Supply R1 (Chris Brown) email.~~ ✅ **dcbrown@vt.edu** (2026-06-30)
+- ~~Supply R2 (Burcin Afsari) email; verify spelling.~~ ✅ **Kereshmeh Afsari, keresh@vt.edu** — name was Kereshmeh, not Burcin (2026-06-30)
 - Email-warn all three references the day of submission (Anthropic contacts them without notice).
 - Decide pronunciation / pronouns optional fields (skip is fine).
 - Final eyeball pass on prose answers (Why Fellows, research areas, background, acceptance%, continue-safety%, references R1/R2/R3, anything-else) to convert from draft voice to user voice.
