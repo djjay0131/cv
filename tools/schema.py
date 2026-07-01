@@ -25,6 +25,7 @@ class NameVariant(_StrictModel):
 
 class Contact(_StrictModel):
     email: str = Field(min_length=1)
+    phone: Optional[str] = None
     linkedin: Optional[str] = None
     github: Optional[str] = None
     x: Optional[str] = None
