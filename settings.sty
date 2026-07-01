@@ -33,7 +33,13 @@
 
 \newcommand{\smallcaps}[1]{\textsc{\lowercase{#1}}}
 
-\RequirePackage[a4paper,nohead,nofoot,hmargin=2.25cm,vmargin=2cm]{geometry}
+\RequirePackage[a4paper,nohead,nofoot,hmargin=1.6cm,vmargin=1.5cm]{geometry}
+% Tighten default itemize spacing without enumitem (which conflicts with
+% curve.cls's description environment).
+\let\origitemize\itemize
+\renewenvironment{itemize}
+  {\origitemize\setlength{\itemsep}{1pt}\setlength{\topsep}{2pt}\setlength{\parsep}{1pt}}
+  {\endlist}
 \RequirePackage{relsize}
 \RequirePackage[dvipsnames,svgnames]{xcolor}
 \RequirePackage{tikz}
