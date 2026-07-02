@@ -102,11 +102,13 @@
 
 \makerubric{build/\cvvariant/tex/employment}
 \makerubric{build/\cvvariant/tex/education}
-\makerubric{build/\cvvariant/tex/projects}
 
 % Publications are rendered by biblatex directly from own-bib.bib; see publications.tex.
+% Placed early (after Education) so research credibility is visible before Projects/Skills for
+% research-oriented variants.
 \input{publications}
 
+\makerubric{build/\cvvariant/tex/projects}
 \makerubric{build/\cvvariant/tex/skills}
 \makerubric{build/\cvvariant/tex/misc}
 

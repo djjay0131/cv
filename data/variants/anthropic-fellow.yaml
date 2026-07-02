@@ -35,15 +35,12 @@ sections:
       - meng-cs-vt
       - bs-econ-vt
 
+  - type: publications
+
   - type: projects
     include:
-      - agentic-kg
-      - construction-ai
-      - vvuq-beam-solver
       - llm-coding-assistant
       - security-classifier
-
-  - type: publications
 
   - type: skills
     include:
