@@ -41,14 +41,11 @@ sections:
   - type: projects
     include:
       - agentic-kg
+      - remote-robotics-control
+      - llm-data-importer
+      - insurance-schema-framework
       - llm-coding-assistant
       - security-classifier
-      # The three entries below require PLACEHOLDER resolution in
-      # data/content/projects.yaml before compilation. Uncomment as each
-      # project's dates/status/contribution/scope details land.
-      # - remote-robotics-control
-      # - llm-data-importer
-      # - insurance-schema-framework
 
   - type: skills
     include:
