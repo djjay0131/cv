@@ -41,8 +41,9 @@ sections:
   - type: projects
     include:
       - mrs-cloud-architecture
-      - llm-coding-assistant
-      - security-classifier
+      - vttsi
+      - agentic-kg
+      - construction-ai
 
   - type: skills
     include:

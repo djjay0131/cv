@@ -6,20 +6,16 @@
   bullets:
     - id: vt-research-agentic-kg
       text: >-
-        Designing **agentic knowledge graphs for research progression**:
-        an orchestrated agent system (Navigator / Extractor / Continuation)
-        over a research KG modeling problems, assumptions, constraints,
-        evidence spans, datasets, and metrics. Live API + UI on Google
-        Cloud Run; Denario-based agent framework; Python / FastAPI.
+        Researching **LLM-curated knowledge graphs** as a provenance
+        substrate for evidence-based research progression --- studying how
+        agent-orchestrated curation (Navigator / Extractor / Continuation)
+        improves faithfulness of downstream LLM responses compared to
+        LLM-generated KGs.
     - id: vt-research-construction-ai
       text: >-
-        Building **Construction-AI**: an LLM- and KG-backed material
-        takeoff and cut-list optimization platform that parses
-        architectural drawings (DWG / DXF / PDF), extracts geometry, and
-        produces JSON material takeoffs with CAD visualizations. Phase 1
-        MVP shipped (wall / stud / plate calculation, FastAPI + React);
-        proposal extends to YOLOv8 object detection, LLM-driven
-        interpretation, and OR-Tools optimization.
+        Investigating **LLM-curated KGs** as engineering-knowledge
+        substrates (construction-domain material takeoff), with an emerging
+        **VVUQ** layer for reproducibility of engineering-simulation claims.
     - id: vt-research-vvuq
       text: >-
         Coauthored **Verification, Validation, and Predictive
