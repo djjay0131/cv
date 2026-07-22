@@ -13,8 +13,6 @@ sections:
   - type: employment
     include:
       - vt-doctoral-research
-      - id: vt-gra-mrs
-        bullets: [vt-gra-mrs-overview, vt-gra-mrs-iac, vt-gra-mrs-security]
       - id: yoh-adf-architect
         bullets: [yoh-llm, yoh-api, yoh-mvp]
       - id: duck-creek-architect
