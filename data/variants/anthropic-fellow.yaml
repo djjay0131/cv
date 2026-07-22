@@ -33,14 +33,22 @@ sections:
     include:
       - phd-cs-vt
       - meng-cs-vt
+      - mit-vt
       - bs-econ-vt
 
   - type: publications
 
   - type: projects
     include:
+      - agentic-kg
       - llm-coding-assistant
       - security-classifier
+      # The three entries below require PLACEHOLDER resolution in
+      # data/content/projects.yaml before compilation. Uncomment as each
+      # project's dates/status/contribution/scope details land.
+      # - remote-robotics-control
+      # - llm-data-importer
+      # - insurance-schema-framework
 
   - type: skills
     include:

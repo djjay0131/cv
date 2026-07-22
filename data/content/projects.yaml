@@ -39,3 +39,42 @@
 - id: nfl-ml
   name: "Predicting NFL Player Performance"
   summary: "Time-series modeling using ML regressors."
+
+# ---------------------------------------------------------------------------
+# The three entries below were surfaced from reference-framing on 2026-07-19
+# and skeletonized on 2026-07-21 (Sprint Day 3). Each has PLACEHOLDER fields
+# that MUST be filled by Jason before the anthropic-fellow variant compiles
+# for external submission. See cv-fellows-private:
+#   anthropic-fellows-2026/references/reference-strategy.md#15-verification-questions
+# for the questions each project needs to answer.
+# ---------------------------------------------------------------------------
+
+- id: remote-robotics-control
+  name: "Remote Robotics Control Platform"
+  summary: >-
+    Cloud-and-edge system for remotely operating robots over the internet:
+    Google Cloud (API + web apps), Tailscale mesh VPN (robot networking),
+    Raspberry Pi edge nodes (internal VPN routing + onboard video encoding).
+    LLM-assisted engineering throughout using Claude.
+    [PLACEHOLDER: dates, status (production / prototype / research concept),
+    public link if any, NDA/IP constraints, Jason's specific contribution
+    scope vs collaborator scope.]
+
+- id: llm-data-importer
+  name: "LLM-Assisted Data Importer"
+  summary: >-
+    LLM-driven data-import pipeline for insurance data using Claude for
+    structured extraction, mapping, and validation of heterogeneous input
+    sources.
+    [PLACEHOLDER: dates, status, public link if any, NDA/IP constraints,
+    co-implementer vs co-designer framing with Dave Hollander, specific
+    scale/impact numbers if disclosable.]
+
+- id: insurance-schema-framework
+  name: "Common Insurance Schema Framework"
+  summary: >-
+    Common-schema framework for insurance data, built with Claude assistance
+    to reconcile carrier-specific data models into a shared canonical form.
+    [PLACEHOLDER: dates, status, public link if any, standards referenced
+    (ACORD? IBM insurance model?), NDA/IP constraints, co-implementer vs
+    co-designer framing with Dave Hollander.]
