@@ -13,9 +13,10 @@ sections:
   - type: employment
     include:
       - vt-doctoral-research
-      - vt-gra-mrs
+      - id: vt-gra-mrs
+        bullets: [vt-gra-mrs-overview, vt-gra-mrs-iac, vt-gra-mrs-security]
       - id: yoh-adf-architect
-        bullets: [yoh-llm, yoh-api]
+        bullets: [yoh-llm, yoh-api, yoh-mvp]
       - id: duck-creek-architect
         bullets: [dc-sev1, dc-pen-testing]
       - id: blackbaud-principal
@@ -25,8 +26,6 @@ sections:
       - id: djjaynet-consultant
         collapse: true
       - id: limeleap-chief-engineer
-        collapse: true
-      - id: limeleap-director-productivity
         collapse: true
 
   - type: education
@@ -57,6 +56,3 @@ sections:
       - platforms
 
   - type: misc
-
-  - type: referee
-    content_id: available
