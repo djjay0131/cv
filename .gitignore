@@ -6,3 +6,7 @@ __pycache__/
 .ruff_cache/
 .coverage
 *.egg-info/
+
+# Application sprint working folder — contains private strategy, references,
+# offer percentages, and internal self-assessment. Do NOT commit.
+applications/

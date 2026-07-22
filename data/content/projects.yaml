@@ -1,3 +1,14 @@
+- id: mrs-cloud-architecture
+  name: "Multi Robot System --- Cloud + Edge Architecture (VT ARCADE Lab)"
+  url: "https://arcade.mlsoc.vt.edu/"
+  summary: >-
+    Designed and built the cloud-and-edge architecture for the ARCADE Lab's
+    Multi Robot System for remote construction-progress monitoring: Google
+    Cloud (REST API + web apps), Tailscale mesh VPN for robot networking,
+    Raspberry Pi edge nodes handling internal VPN routing and onboard video
+    encoding, 2FA-hardened Web UI. Architecture completed and proven in a
+    5-week GRA appointment; **Claude used as engineering partner throughout**.
+
 - id: agentic-kg
   name: "Agentic Knowledge Graphs for Research Progression"
   summary: >-

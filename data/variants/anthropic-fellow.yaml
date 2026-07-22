@@ -13,9 +13,10 @@ sections:
   - type: employment
     include:
       - vt-doctoral-research
-      - vt-gra-mrs
+      - id: vt-gra-mrs
+        bullets: [vt-gra-mrs-overview]
       - id: yoh-adf-architect
-        bullets: [yoh-llm, yoh-api]
+        bullets: [yoh-mvp, yoh-llm, yoh-api]
       - id: duck-creek-architect
         bullets: [dc-sev1, dc-pen-testing]
       - id: blackbaud-principal
@@ -39,6 +40,7 @@ sections:
 
   - type: projects
     include:
+      - mrs-cloud-architecture
       - llm-coding-assistant
       - security-classifier
 
