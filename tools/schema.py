@@ -80,6 +80,7 @@ class Project(_IdItem):
     name: str = Field(min_length=1)
     summary: str = Field(min_length=1)
     github: Optional[str] = None
+    url: Optional[str] = None
 
 
 class SkillGroup(_IdItem):

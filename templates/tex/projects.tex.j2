@@ -1,5 +1,5 @@
 \begin{rubric}{Selected Projects \& Research}
 {% for p in projects %}
-\entry*{\textbf{ {{- p.name | md_to_latex -}} } --- {{ p.summary | md_to_latex }}}
+\entry*{\textbf{ {{- p.name | md_to_latex -}} }{%- if p.url %}~\href{ {{- p.url -}} }{\textcolor{MarkerColour!80!black}{\scriptsize\faLink}}{%- elif p.github %}~\href{ {{- p.github -}} }{\textcolor{MarkerColour!80!black}{\scriptsize\faGithub}}{%- endif %} --- {{ p.summary | md_to_latex }}}
 {% endfor %}
 \end{rubric}
