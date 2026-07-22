@@ -35,7 +35,10 @@
 
 \RequirePackage[a4paper,nohead,nofoot,hmargin=1.6cm,vmargin=1.5cm]{geometry}
 % Tighten default itemize spacing without enumitem (which conflicts with
-% curve.cls's description environment).
+% curve.cls's description environment). \leftmargini controls the horizontal
+% indent applied at \begin{itemize}; LaTeX's default 2.5em wastes a lot of
+% page real-estate for bullet lists.
+\setlength{\leftmargini}{1em}
 \let\origitemize\itemize
 \renewenvironment{itemize}
   {\origitemize\setlength{\itemsep}{1pt}\setlength{\topsep}{2pt}\setlength{\parsep}{1pt}}
@@ -108,7 +111,9 @@
 \urlstyle{tt}
 
 \newcommand{\prefixmarker}[1]{\def\@prefixmarker{#1}}
-\def\@prefixmarker{\relscale{.9}\faBookmark}
+% Solid bullet marker for entry prefixes (was \faBookmark, which read as a
+% flag/ribbon shape).
+\def\@prefixmarker{\textbullet}
 
 \prefix{%
   \hspace*{-1ex}
