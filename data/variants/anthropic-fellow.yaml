@@ -44,6 +44,7 @@ sections:
       - vttsi
       - agentic-kg
       - construction-ai
+      - security-classifier
 
   - type: skills
     include:
