@@ -112,8 +112,11 @@
 
 \newcommand{\prefixmarker}[1]{\def\@prefixmarker{#1}}
 % Solid bullet marker for entry prefixes (was \faBookmark, which read as a
-% flag/ribbon shape).
-\def\@prefixmarker{\textbullet}
+% flag/ribbon shape). Math-mode bullet ($\bullet$) is used instead of
+% \textbullet because the latter triggers a fontspec fallback through
+% SimpleIcons.otf on our XeLaTeX setup, and that font has no space glyph,
+% escalating "Missing character" to a fatal error.
+\def\@prefixmarker{\ensuremath{\bullet}}
 
 \prefix{%
   \hspace*{-1ex}
