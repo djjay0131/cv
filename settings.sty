@@ -36,13 +36,12 @@
 % hmargin cut 1.6cm → 1.2cm: reclaims 8mm of horizontal width for content;
 % still leaves a safe printable border on any modern printer.
 \RequirePackage[a4paper,nohead,nofoot,hmargin=1.2cm,vmargin=1.5cm]{geometry}
-% Tighten default itemize spacing without enumitem (which conflicts with
-% curve.cls's description environment).
-% - \leftmargini = 0em: bullets sit flush at their parent block's left edge
-%   (was 1em, was LaTeX default 2.5em)
-% - \labelsep = 0.25em: gap between the bullet marker and item text
-%   (LaTeX default ~0.5em)
-\setlength{\leftmargini}{0em}
+% Tight itemize geometry without enumitem (which conflicts with curve.cls's
+% description environment). The bullet marker needs \leftmargini >=
+% \labelwidth + \labelsep or it overlaps the parent block's text; these
+% values leave room for a \bullet marker with a snug ~0.25em gap.
+\setlength{\leftmargini}{0.9em}
+\setlength{\labelwidth}{0.5em}
 \setlength{\labelsep}{0.25em}
 \let\origitemize\itemize
 \renewenvironment{itemize}
