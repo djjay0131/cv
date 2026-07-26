@@ -12,10 +12,10 @@ sections:
 
   - type: employment
     include:
-      - vt-doctoral-research
-      - vt-gra-mrs
+      - id: vt-doctoral-research
+        bullets: [vt-research-vvuq, vt-research-construction-ai]
       - id: yoh-adf-architect
-        bullets: [yoh-llm, yoh-api]
+        bullets: [yoh-llm, yoh-api, yoh-mvp]
       - id: duck-creek-architect
         bullets: [dc-sev1, dc-pen-testing]
       - id: blackbaud-principal
@@ -26,19 +26,22 @@ sections:
         collapse: true
       - id: limeleap-chief-engineer
         collapse: true
-      - id: limeleap-director-productivity
-        collapse: true
 
   - type: education
     include:
       - phd-cs-vt
       - meng-cs-vt
+      - mit-vt
       - bs-econ-vt
 
   - type: publications
 
   - type: projects
     include:
+      - agentic-kg
+      - remote-robotics-control
+      - llm-data-importer
+      - insurance-schema-framework
       - llm-coding-assistant
       - security-classifier
 
@@ -51,7 +54,6 @@ sections:
         items: [Azure, AWS, Docker, FastAPI, Streamlit, PostgreSQL, "SQL Server", VS Code, PyCharm, Wireshark]
       - platforms
 
-  - type: misc
-
-  - type: referee
-    content_id: available
+  # Misc section (Awards + Certifications) dropped from this variant to
+  # keep the resume at 2 pages. CSSLP survives via the summary line's
+  # "CSSLP-certified" mention.

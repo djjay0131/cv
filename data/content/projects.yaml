@@ -39,3 +39,33 @@
 - id: nfl-ml
   name: "Predicting NFL Player Performance"
   summary: "Time-series modeling using ML regressors."
+
+# ---------------------------------------------------------------------------
+# The three entries below were surfaced from reference-framing on 2026-07-19
+# and detailed on 2026-07-21 (Sprint Day 3) from Jason's answers to
+# contribution/status/date verification questions.
+# ---------------------------------------------------------------------------
+
+- id: remote-robotics-control
+  name: "Remote Robotics Control Platform"
+  summary: >-
+    Solo end-to-end architecture and implementation of a cloud-and-edge
+    platform for remotely operating robots over the internet (2024--2026).
+    Google Cloud hosted the API and web apps; a Tailscale mesh VPN
+    connected the robot fleet; Raspberry Pi edge nodes handled internal
+    VPN routing and onboard camera video encoding. Built with
+    LLM-assisted engineering throughout using Claude.
+
+- id: llm-data-importer
+  name: "LLM-Assisted Data Importer (Insurance)"
+  summary: >-
+    Internal prototype (2024--2026) of an LLM-driven data-import pipeline
+    for the insurance domain, using Claude for structured extraction,
+    mapping, and validation of heterogeneous carrier input sources.
+
+- id: insurance-schema-framework
+  name: "Common Insurance Schema Framework"
+  summary: >-
+    Internal prototype (2024--2026) of a common-schema framework for
+    insurance data, built with Claude assistance to reconcile
+    carrier-specific data models into a shared canonical form.
