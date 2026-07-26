@@ -10,7 +10,12 @@
   institution: "Virginia Tech"
   location: "Blacksburg, VA"
 
+- id: mit-vt
+  degree: "Master of Information Technology"
+  institution: "Virginia Tech"
+  location: "Blacksburg, VA"
+
 - id: bs-econ-vt
-  degree: "M.I.T. and B.S., Economics"
+  degree: "B.S., Economics"
   institution: "Virginia Tech"
   location: "Blacksburg, VA"
