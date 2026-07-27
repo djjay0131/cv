@@ -57,7 +57,10 @@
 
 - id: security-classifier
   name: "Security Vulnerability Classifier"
-  summary: "Repository scanner classifying code against CVE mappings."
+  summary: >-
+    ML classifier scanning code repositories against the
+    CVE.org vulnerability corpus to flag patterns matching
+    known vulnerability classes.
 
 - id: sentiment-yelp
   name: "Sentiment Analysis of Yelp Reviews"
