@@ -65,15 +65,6 @@
 - id: ai-ml
   group: "AI/ML"
   items:
-    - "scikit-learn"
-    - "TensorFlow"
-    - "KNN"
-    - "RNN"
-    - "CNN"
-    - "LSTM"
-    - "LLM"
-    - "SVM"
-    - "Linear Regression"
-    - "Random Forest"
-    - "Naive Bayes"
-    - "Feature Engineering"
+    - "Frameworks: scikit-learn, TensorFlow, PyTorch, OpenCV, EasyOCR, Neo4j"
+    - "LLM & Agentic Tooling: Claude (engineering partner), prompt engineering, LLM evals, agentic orchestration"
+    - "ML Methods: empirical evaluation, evidence-based reasoning, provenance-aware knowledge graphs, VVUQ"

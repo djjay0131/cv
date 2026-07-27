@@ -104,7 +104,7 @@
     - id: dc-sev1-detailed
       text: "Analyzed server logs and predicted Sev 1 cases through creation of AI algorithm written in Python, using scikit-learn."
     - id: dc-pen-testing
-      text: "Coordinated in PEN testing and consulted on risk mitigation options for pre go-live security assessment."
+      text: "Ran pen-testing for pre go-live security assessment; consulted on risk-mitigation options and remediation prioritization."
     - id: dc-sso
       text: "Developed Azure Authentication flow for SSO integration into on-premise, cloud-hosted, and third-party applications."
     - id: dc-upgrade-short
