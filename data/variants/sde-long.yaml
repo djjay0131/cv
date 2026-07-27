@@ -127,20 +127,7 @@ sections:
           - Vue.js
           - Bash
           - Gradle
-      - id: ai-ml
-        items:
-          - scikit-learn
-          - TensorFlow
-          - KNN
-          - RNN
-          - CNN
-          - LSTM
-          - LLM
-          - SVM
-          - Linear Regression
-          - Random Forest
-          - Naive Bayes
-          - Feature Engineering
+      - ai-ml
 
   - type: misc
 
