@@ -6,20 +6,16 @@
   bullets:
     - id: vt-research-agentic-kg
       text: >-
-        Designing **agentic knowledge graphs for research progression**:
-        an orchestrated agent system (Navigator / Extractor / Continuation)
-        over a research KG modeling problems, assumptions, constraints,
-        evidence spans, datasets, and metrics. Live API + UI on Google
-        Cloud Run; Denario-based agent framework; Python / FastAPI.
+        Researching **LLM-curated knowledge graphs** as a provenance
+        substrate for evidence-based research progression --- studying how
+        agent-orchestrated curation (Navigator / Extractor / Continuation)
+        improves faithfulness of downstream LLM responses compared to
+        LLM-generated KGs.
     - id: vt-research-construction-ai
       text: >-
-        Building **Construction-AI**: an LLM- and KG-backed material
-        takeoff and cut-list optimization platform that parses
-        architectural drawings (DWG / DXF / PDF), extracts geometry, and
-        produces JSON material takeoffs with CAD visualizations. Phase 1
-        MVP shipped (wall / stud / plate calculation, FastAPI + React);
-        proposal extends to YOLOv8 object detection, LLM-driven
-        interpretation, and OR-Tools optimization.
+        Investigating **LLM-curated KGs** as engineering-knowledge
+        substrates (construction-domain material takeoff), with an emerging
+        **VVUQ** layer for reproducibility of engineering-simulation claims.
     - id: vt-research-vvuq
       text: >-
         Coauthored **Verification, Validation, and Predictive
@@ -36,8 +32,8 @@
   bullets:
     - id: vt-gra-mrs-overview
       text: >-
-        Deploying cloud infrastructure for the **Multi Robot System (MRS)**
-        for Remote Construction Progress Monitoring, including network
+        Designed and built cloud infrastructure for the **Multi Robot System
+        (MRS)** for Remote Construction Progress Monitoring, including network
         architecture, mesh VPN, REST API, and Web UI.
     - id: vt-gra-mrs-iac
       text: >-
@@ -60,13 +56,17 @@
   bullets:
     - id: yoh-mvp
       text: >-
-        Built a small SDE team and delivered an MVP Insurance Data Ingestion
-        Platform using Microsoft's Common Data Model, reducing time-to-ingest
-        by **50%**.
+        Led a small SDE team delivering V1 of an **Insurance Data Ingestion
+        Platform** for a specialty carrier: extended Microsoft's Common Data
+        Model into a domain schema for the carrier's data types; reduced
+        time-to-ingest by **50%**.
     - id: yoh-api
       text: "Architected and implemented an API to orchestrate Azure Data Factory pipelines and data flows."
     - id: yoh-llm
-      text: "Prototyped LLM-assisted source-to-target mapping generating ADF transformations and derived columns."
+      text: >-
+        Used **Claude as engineering partner** to scaffold pipeline code and
+        generate ADF source-to-target mappings; hand-implemented the more
+        complex transformation and validation logic.
     - id: yoh-streamlit
       text: "Built a Streamlit UI integrated with the Data Ingestion API for faster analyst feedback loops."
 

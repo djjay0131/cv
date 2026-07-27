@@ -12,10 +12,11 @@ sections:
 
   - type: employment
     include:
-      - id: vt-doctoral-research
-        bullets: [vt-research-vvuq, vt-research-construction-ai]
+      - vt-doctoral-research
+      - id: vt-gra-mrs
+        bullets: [vt-gra-mrs-overview]
       - id: yoh-adf-architect
-        bullets: [yoh-llm, yoh-api, yoh-mvp]
+        bullets: [yoh-mvp, yoh-llm, yoh-api]
       - id: duck-creek-architect
         bullets: [dc-sev1, dc-pen-testing]
       - id: blackbaud-principal
@@ -25,6 +26,8 @@ sections:
       - id: djjaynet-consultant
         collapse: true
       - id: limeleap-chief-engineer
+        collapse: true
+      - id: limeleap-director-productivity
         collapse: true
 
   - type: education
@@ -38,11 +41,10 @@ sections:
 
   - type: projects
     include:
+      - mrs-cloud-architecture
+      - vttsi
       - agentic-kg
-      - remote-robotics-control
-      - llm-data-importer
-      - insurance-schema-framework
-      - llm-coding-assistant
+      - construction-ai
       - security-classifier
 
   - type: skills

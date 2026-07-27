@@ -1,19 +1,46 @@
+- id: mrs-cloud-architecture
+  name: "Multi Robot System --- Cloud + Edge Architecture (VT ARCADE Lab)"
+  url: "https://arcade.mlsoc.vt.edu/"
+  summary: >-
+    Designed and built the cloud-and-edge architecture for the ARCADE Lab's
+    Multi Robot System for remote construction-progress monitoring: Google
+    Cloud (REST API + web apps), Tailscale mesh VPN for robot networking,
+    Raspberry Pi edge nodes handling internal VPN routing and onboard video
+    encoding, 2FA-hardened Web UI. Architecture completed and proven in a
+    5-week GRA appointment; **Claude used as engineering partner throughout**.
+
+- id: vttsi
+  name: "VTTSI --- LLM-Adaptive Intersection Safety Scoring"
+  summary: >-
+    Distributed rewrite of a CS6604 traffic-safety application:
+    provenance-tracked evidence ingestion (NWS weather, VDOT/511 cameras)
+    → deterministic RT-SI + MCDM baselines → **Claude Opus** adaptive
+    adjustment with grounding guardrails and deterministic fallback →
+    honest-null ablation eval (Spearman / Pearson). Python
+    ports-and-adapters microservices; live-Claude integration wired;
+    ~97% offline coverage.
+
 - id: agentic-kg
   name: "Agentic Knowledge Graphs for Research Progression"
+  url: "https://djjay0131.github.io/agentic-kg/"
   summary: >-
-    Orchestrated agent system (Navigator / Extractor / Continuation) over a
-    research KG modeling problems, assumptions, constraints, evidence spans,
-    datasets, and metrics. Live API + UI on Google Cloud Run; Denario agent
-    framework, Python / FastAPI.
+    Orchestrated agent system (Navigator / Extractor / Continuation)
+    building an **LLM-curated research KG** --- problems, assumptions,
+    constraints, evidence spans, datasets, metrics --- as the provenance
+    substrate for downstream research-assistant responses. Denario agent
+    framework; Python / FastAPI; staging deployed on Cloud Run. Approaching
+    experimental comparison against LLM-generated KGs.
 
 - id: construction-ai
   name: "Construction-AI: LLM- and KG-backed Material Takeoff"
+  url: "https://djjay0131.github.io/construction-ai-proposal/"
   summary: >-
-    AI-powered web app that parses architectural drawings (DWG / DXF / PDF),
-    extracts geometry, and produces JSON material takeoffs with cut-list
-    optimization. Phase 1 MVP shipped (wall / stud / plate calculation,
-    React UI, Docker); proposal extends to YOLOv8 object detection,
-    LLM-driven interpretation, and OR-Tools optimization.
+    Web app parsing architectural drawings (DWG / DXF / PDF), extracting
+    geometry via PyTorch / OpenCV / EasyOCR, producing JSON material
+    takeoffs with OR-Tools cut-list optimization backed by a Neo4j
+    **LLM-curated KG**. Phase 1 MVP deployed on Cloud Run; Phase 5 in
+    progress adds a **VVUQ** (verification / validation / uncertainty
+    quantification) layer for engineering-simulation reproducibility.
 
 - id: vvuq-beam-solver
   name: "VVUQ of an Euler--Bernoulli Beam Finite-Difference Model"

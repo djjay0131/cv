@@ -33,9 +33,16 @@
 
 \newcommand{\smallcaps}[1]{\textsc{\lowercase{#1}}}
 
-\RequirePackage[a4paper,nohead,nofoot,hmargin=1.6cm,vmargin=1.5cm]{geometry}
-% Tighten default itemize spacing without enumitem (which conflicts with
-% curve.cls's description environment).
+% hmargin cut 1.6cm → 1.2cm: reclaims 8mm of horizontal width for content;
+% still leaves a safe printable border on any modern printer.
+\RequirePackage[a4paper,nohead,nofoot,hmargin=1.2cm,vmargin=1.5cm]{geometry}
+% Tight itemize geometry without enumitem (which conflicts with curve.cls's
+% description environment). The bullet marker needs \leftmargini >=
+% \labelwidth + \labelsep or it overlaps the parent block's text; these
+% values leave room for a \bullet marker with a snug ~0.25em gap.
+\setlength{\leftmargini}{0.9em}
+\setlength{\labelwidth}{0.5em}
+\setlength{\labelsep}{0.25em}
 \let\origitemize\itemize
 \renewenvironment{itemize}
   {\origitemize\setlength{\itemsep}{1pt}\setlength{\topsep}{2pt}\setlength{\parsep}{1pt}}
@@ -54,25 +61,27 @@
 \RequirePackage{csquotes}
 
 \RequirePackage{tikz}
-\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-   \node[shape=circle,text=white,fill=MarkerColour!80!black,font=\sffamily\scriptsize\bfseries,inner sep=1pt,text height=1.35ex,minimum width=1.5em,text centered] (char) {#1};}}
-   
+% Small filled marker for bib entries — was a large "circled number" pill
+% that read visually as a big bubble; now a discreet colored square with
+% the number inside, matching the density of the rest of the resume.
+\newcommand*\circled[1]{{\color{MarkerColour!80!black}\sffamily\scriptsize\bfseries#1.}}
+
 \newcounter{bibitem}
 \AtBeginBibliography{\setcounter{bibitem}{1}}
 \iffieldformatundef{labelnumberwidth}{%
   % if author-year style
-  \AtEveryBibitem{\makebox[2.5em][l]{\circled{\thebibitem}\stepcounter{bibitem}}}%
+  \AtEveryBibitem{\makebox[1.2em][l]{\circled{\thebibitem}\stepcounter{bibitem}}}%
 }{%
   % if numeric style
-  \DeclareFieldFormat{labelnumberwidth}{\makebox[2.5em][l]{\circled{\thebibitem}}}%
+  \DeclareFieldFormat{labelnumberwidth}{\makebox[1.2em][l]{\circled{\thebibitem}}}%
   \setlength{\biblabelsep}{0pt}%
   \AtEveryBibitem{\stepcounter{bibitem}}%
 }
 \AtEveryBibitem{\iffieldundef{doi}{}{\clearfield{url}}}
 
-% \renewcommand{\bibfont}{\small}
-\setlength{\bibitemsep}{1.5ex}
-\setlength{\bibhang}{2.5em}
+% Tightened bibliography spacing.
+\setlength{\bibitemsep}{0.6ex}
+\setlength{\bibhang}{1.2em}
 \RequirePackage{xpatch}
 \xpretofieldformat{doi}
   {\textcolor{MarkerColour!80!black}{\scriptsize\faLink}}
@@ -104,11 +113,17 @@
 
 \keyalignment{r}
 \rubricalignment{l}
-\renewcommand{\arraystretch}{1.25}
+% Tighter row spacing throughout tabular-based curve entries.
+\renewcommand{\arraystretch}{1.1}
 \urlstyle{tt}
 
 \newcommand{\prefixmarker}[1]{\def\@prefixmarker{#1}}
-\def\@prefixmarker{\relscale{.9}\faBookmark}
+% Solid bullet marker for entry prefixes (was \faBookmark, which read as a
+% flag/ribbon shape). Math-mode bullet ($\bullet$) is used instead of
+% \textbullet because the latter triggers a fontspec fallback through
+% SimpleIcons.otf on our XeLaTeX setup, and that font has no space glyph,
+% escalating "Missing character" to a fatal error.
+\def\@prefixmarker{\ensuremath{\bullet}}
 
 \prefix{%
   \hspace*{-1ex}
