@@ -66,6 +66,12 @@
 %% \cvphoto (from _theme.tex above) drives the choice.
 \ifdefstring{\cvphoto}{false}{\excludecomment{fullonly}}{\includecomment{fullonly}}
 
+%% Prevent LaTeX's default \flushbottom from stretching vertical space to fill
+%% each page — that stretching is what causes bullet spacing to look
+%% inconsistent between employment sections. \raggedbottom lets pages end at
+%% the natural point.
+\raggedbottom
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
