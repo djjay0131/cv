@@ -40,10 +40,20 @@
 
 % Change the fonts if you want
 \ifxetexorluatex % If you're using XeLaTeX or LuaLaTeX
-  \usepackage{fontspec} 
+  \usepackage{fontspec}
   %% You can use \setmainfont etc; I'm just using these font packages here because they provide OpenType fonts for use by XeLaTeX/LuaLaTeX anyway
-  \usepackage[p,osf,swashQ]{cochineal}
+  %%
+  %% LOAD ORDER IS LOAD-BEARING: cabin MUST be loaded before cochineal.
+  %% cochineal.sty sets a global \defaultfontfeatures{...Extension = .otf...};
+  %% cabin.sty overwrites it and then clears it outright (\defaultfontfeatures{}
+  %% at cabin.sty:123, "turn off defaults in case other fonts are selected").
+  %% Loaded cochineal-first, Cochineal's families lose Extension=.otf and
+  %% \begin{document} attempts a bare-name lookup for "Cochineal-Roman", which
+  %% XeTeX cannot resolve for a texmf-only font -- fatal under TeX Live 2026:
+  %%   Requested font "Cochineal-Roman" -> font not found, using "nullfont"
+  %% Loading cabin first lets cochineal establish its defaults last.
   \usepackage[medium,bold]{cabin}
+  \usepackage[p,osf,swashQ]{cochineal}
   \usepackage[varqu,varl,scale=0.9]{zi4}
 \else % If you're using pdfLaTeX or latex
   \usepackage[T1]{fontenc}
