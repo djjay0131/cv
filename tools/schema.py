@@ -153,6 +153,13 @@ class Variant(_StrictModel):
     label: Optional[str] = None
     description: Optional[str] = None
     theme: VariantTheme = Field(default_factory=VariantTheme)
+    # Publications are rendered by biblatex from cv-llt.tex, not from a Jinja
+    # template, so their placement cannot be expressed in `sections`. When true,
+    # the bibliography is emitted after Projects/Skills instead of directly after
+    # Education. Declared explicitly rather than derived from `sections` order:
+    # existing variants list projects before publications while rendering the
+    # bibliography early, so positional inference would silently move them.
+    publications_late: bool = False
     sections: list[VariantSection] = Field(min_length=1)
     raw_overrides: dict[str, RawOverride] = Field(default_factory=dict)
 

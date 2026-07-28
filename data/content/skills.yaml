@@ -1,3 +1,18 @@
+- id: agentic
+  group: "Agentic Engineering"
+  items:
+    - "Claude Code"
+    - "Claude API"
+    - "MCP"
+    - "Agent orchestration"
+    - "Spec-driven development"
+    - "LLM evaluation"
+    - "Retrieval-augmented generation"
+    - "Knowledge graphs"
+    - "Cursor"
+    - "OpenAI Codex"
+    - "GitHub Copilot"
+
 - id: platforms
   group: "Platforms"
   items:
@@ -36,6 +51,11 @@
     - "Wireshark"
     - "Streamlit"
     - "FastAPI"
+    - "Tailwind CSS"
+    - "Vite"
+    - "Neo4j"
+    - "Google Cloud"
+    - "Terraform"
 
 - id: languages
   group: "Languages"
@@ -60,6 +80,10 @@
     - "Scala"
     - "Node.js"
     - "Vue.js"
+    - "React"
+    - "React Native"
+    - "TypeScript"
+    - "Next.js"
     - "Gradle"
 
 - id: ai-ml

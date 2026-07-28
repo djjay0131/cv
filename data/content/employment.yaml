@@ -16,6 +16,17 @@
         Investigating **LLM-curated KGs** as engineering-knowledge
         substrates (construction-domain material takeoff), with an emerging
         **VVUQ** layer for reproducibility of engineering-simulation claims.
+    - id: vt-research-genai-evidence
+      text: >-
+        Researching the **empirical evaluation of GenAI coding tools** --- how
+        generative tools reason about software-engineering evidence, and how
+        claims from LLM-assisted work can be accumulated and verified rather
+        than asserted (**ICSE 2026**; arXiv preprints).
+    - id: vt-mentoring-agentic-kg
+      text: >-
+        Supervising an undergraduate researcher on the agentic knowledge-graph
+        project --- evaluation testing, ground-truth development, and literature
+        organization and review.
     - id: vt-research-vvuq
       text: >-
         Coauthored **Verification, Validation, and Predictive
@@ -60,6 +71,24 @@
         Platform** for a specialty carrier: extended Microsoft's Common Data
         Model into a domain schema for the carrier's data types; reduced
         time-to-ingest by **50%**.
+    - id: yoh-mvp-senior
+      text: >-
+        Led a **senior technical team** delivering V1 of an **Insurance Data
+        Ingestion Platform** for a specialty carrier: extended Microsoft's Common
+        Data Model into a domain schema for the carrier's data types; reduced
+        time-to-ingest by **50%**.
+    - id: yoh-agentic-team
+      text: >-
+        Established the **LLM-assisted engineering conventions** the team worked
+        under --- where agent-generated code was appropriate, what human review it
+        required before merge, and how the codebase was structured to keep agent
+        output reliable.
+    - id: yoh-spec-gates
+      text: >-
+        Ran a **spec-first workflow with validation gates**: written specification
+        → agent-generated implementation → tests and schema validation as the
+        merge gate, with complex transformation and validation logic
+        hand-implemented and reviewed.
     - id: yoh-api
       text: "Architected and implemented an API to orchestrate Azure Data Factory pipelines and data flows."
     - id: yoh-llm
@@ -156,6 +185,11 @@
         integration code into single deployment package.
     - id: bb-training
       text: "Enhanced staff development and performance by training and leading junior staff members."
+    - id: bb-offshore-mentoring
+      text: >-
+        Owned the enterprise conversion tooling and **mentored offshore engineers
+        and team members** on it, raising delivery consistency across distributed
+        teams.
     - id: bb-angular-tool
       text: "Collaborated with Microsoft consultants to build fully customizable bulk import tool using Angular, Node.JS, and HTML 5.0."
 

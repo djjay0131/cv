@@ -12,7 +12,10 @@ sections:
 
   - type: employment
     include:
-      - vt-doctoral-research
+      - id: vt-doctoral-research
+        # Pinned: new agentic/mentoring bullets added to this role for the
+        # agentic-principal variant must not leak into this resume.
+        bullets: [vt-research-agentic-kg, vt-research-construction-ai, vt-research-vvuq]
       - id: vt-gra-mrs
         bullets: [vt-gra-mrs-overview]
       - id: yoh-adf-architect

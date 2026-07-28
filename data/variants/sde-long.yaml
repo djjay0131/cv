@@ -8,7 +8,10 @@ sections:
 
   - type: employment
     include:
-      - yoh-adf-architect
+      - id: yoh-adf-architect
+        # Pinned: new agentic bullets added to this role for the
+        # agentic-principal variant must not leak into this resume.
+        bullets: [yoh-mvp, yoh-api, yoh-llm, yoh-streamlit]
 
       - id: duck-creek-architect
         bullets:

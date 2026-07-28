@@ -51,6 +51,16 @@
     coauthor Cheng-Shun Chuang). Planned extension into a reusable VVUQ
     framework.
 
+- id: cv-pipeline
+  name: "Data-Driven CV Pipeline --- A Codebase Structured for Agentic Generation"
+  url: "https://github.com/djjay0131/cv"
+  summary: >-
+    Public, inspectable exhibit of **structuring a codebase so agent output stays
+    reliable**: a YAML content pool, strict Pydantic schemas that fail loud on any
+    unknown id, Jinja template contracts, and pytest gates. A new role-targeted
+    resume is authored as a declarative selector --- agents add content and
+    variants without touching rendering logic.
+
 - id: llm-coding-assistant
   name: "LLM Coding Assistant"
   summary: "Python, Streamlit, OpenAI API; FastAPI backend; agentmon design."

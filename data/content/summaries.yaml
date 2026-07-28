@@ -17,6 +17,20 @@
     Published at ICSE 2026, with hands-on depth in ML pipelines, evaluation design,
     and the engineering rigor that industry R&D depends on.
 
+- id: agentic-principal
+  text: >-
+    Principal engineer and solution architect with **20+ years** delivering large,
+    complex systems --- enterprise SaaS operations, Azure data platforms, and
+    full-stack applications in C#, Java, Python, Node, and React --- who now designs
+    development processes in which **AI generates the majority of implementation
+    code under human validation**. Standardized on **Claude Code** after evaluating
+    Cursor, Codex, and Copilot in practice, and built working systems on that
+    workflow: a cloud-and-edge robotics platform, an LLM-driven insurance data
+    importer, and agent-orchestrated knowledge graphs. PhD research at Virginia Tech
+    on the empirical evaluation of GenAI coding tools (**ICSE 2026**; arXiv preprints)
+    supplies the methodology behind the practice. CSSLP-certified; Certified Scrum
+    Master.
+
 - id: fellowship
   text: >-
     PhD candidate in Computer Science (SE with AI/ML/MI) at Virginia Tech, focused on

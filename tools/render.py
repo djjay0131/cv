@@ -58,13 +58,19 @@ def _render_preamble(resolved: dict) -> str:
 
 
 def _render_theme(variant) -> str:
-    """Build a LaTeX fragment declaring the variant's theme style + photo flag.
+    """Build a LaTeX fragment declaring the variant's theme style, photo flag, and
+    publication placement.
 
     cv-llt.tex \\input's this file before \\begin{document} and dispatches on
-    \\cvtheme / \\cvphoto via \\ifdefstring.
+    \\cvtheme / \\cvphoto / \\cvpubslate via \\ifdefstring.
     """
     photo = "true" if variant.theme.photo else "false"
-    return f"\\def\\cvtheme{{{variant.theme.style}}}\n\\def\\cvphoto{{{photo}}}\n"
+    pubs_late = "true" if variant.publications_late else "false"
+    return (
+        f"\\def\\cvtheme{{{variant.theme.style}}}\n"
+        f"\\def\\cvphoto{{{photo}}}\n"
+        f"\\def\\cvpubslate{{{pubs_late}}}\n"
+    )
 
 
 def render(

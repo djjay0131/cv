@@ -13,9 +13,16 @@ sections:
   - type: employment
     include:
       - vt-gra-mrs
-      - yoh-adf-architect
+      - id: yoh-adf-architect
+        # Pinned: new agentic bullets added to this role for the
+        # agentic-principal variant must not leak into this resume.
+        bullets: [yoh-mvp, yoh-api, yoh-llm, yoh-streamlit]
       - duck-creek-architect
-      - blackbaud-principal
+      - id: blackbaud-principal
+        # Pinned: see note on yoh-adf-architect above.
+        bullets: [bb-root-cause, bb-devops, bb-devops-detailed, bb-sla, bb-sso,
+                  bb-sso-detailed, bb-rest-api, bb-cd-process, bb-training,
+                  bb-angular-tool]
       - blackbaud-solutions
       - djjaynet-consultant
 
@@ -37,8 +44,18 @@ sections:
   - type: skills
     include:
       - platforms
-      - tools
-      - languages
+      # Pinned to explicit item lists so additions to the shared pool groups
+      # (e.g. React/Terraform, added for the agentic-principal variant) do not
+      # silently change this resume.
+      - id: tools
+        items: ["SQL Server", MySQL, Oracle, Access, PostgreSQL, ".NET", AngularJS,
+                "Entity Framework", jQuery, Atlassian, TeamCity, Azure, "Azure API",
+                AWS, ADO, Docker, Octopus, "Android Studio", IntelliJ, Eclipse,
+                "R Studio", "VS Code", PyCharm, Wireshark, Streamlit, FastAPI]
+      - id: languages
+        items: ["C#", Java, Python, JavaScript, Kotlin, VB.NET, PowerShell, Bash,
+                T-SQL, "HTML 5.0", CSS, ASP.NET, C, "C++", Groovy, "Objective C",
+                PHP, Scala, Node.js, Vue.js, Gradle]
       - ai-ml
 
   - type: misc

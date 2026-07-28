@@ -1,0 +1,83 @@
+variant: agentic-principal
+label: "Principal Agentic Engineer"
+description: "Principal-engineer resume for agentic-transformation roles: architect record threaded with LLM-assisted process design."
+
+theme:
+  style: refined-serif
+  photo: false
+
+# Push the bibliography past Projects/Skills — the agentic project portfolio is the
+# lead evidence for this role; publications are supporting credibility.
+publications_late: true
+
+sections:
+  - type: summary
+    content_id: agentic-principal
+
+  - type: employment
+    include:
+      - id: vt-doctoral-research
+        bullets:
+          - vt-research-genai-evidence
+          - vt-mentoring-agentic-kg
+
+      - id: yoh-adf-architect
+        bullets:
+          - yoh-mvp-senior
+          - yoh-agentic-team
+          - yoh-spec-gates
+          - yoh-api
+
+      - id: duck-creek-architect
+        bullets:
+          - dc-launch
+          - dc-integration
+          - dc-adf
+          - dc-sev1
+
+      - id: blackbaud-principal
+        bullets:
+          - bb-root-cause
+          - bb-devops
+          - bb-offshore-mentoring
+
+      - id: blackbaud-solutions
+        bullets:
+          - bb-sa-implementations
+          - bb-sa-integrations
+          - bb-sa-data-migration
+
+      - id: djjaynet-consultant
+        collapse: true
+      - id: limeleap-chief-engineer
+        collapse: true
+      - id: limeleap-director-productivity
+        collapse: true
+
+  - type: education
+    include:
+      - phd-cs-vt
+      - meng-cs-vt
+      - mit-vt
+      - bs-econ-vt
+
+  - type: projects
+    include:
+      - remote-robotics-control
+      - llm-data-importer
+      - vttsi
+      - agentic-kg
+
+  - type: skills
+    include:
+      - agentic
+      - id: languages
+        items: [Python, "C#", Java, TypeScript, JavaScript, React, "React Native", Node.js, "Next.js", PowerShell, Bash, T-SQL]
+      - id: tools
+        items: [Azure, AWS, "Google Cloud", Docker, Terraform, FastAPI, PostgreSQL, "SQL Server", Neo4j, ".NET", ADO, Octopus, Streamlit]
+      - ai-ml
+
+  - type: publications
+
+  # Misc (Awards + Certifications) is dropped to hold two pages. CSSLP and
+  # Certified Scrum Master survive in the summary line.
