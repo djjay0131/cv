@@ -30,7 +30,7 @@ Last updated: 2026-04-17
 - **Sync enforcement skill**: `constellize`-style skill checking CV↔website alignment.
 - **Formal Lighthouse CI gate**: WCAG AA colors and semantic HTML are in place; `@axe-core/playwright` integration deferred.
 - **Custom domain or root-level hosting**: site is at `djjay0131.github.io/website/`; could rename repo to `djjay0131.github.io` or add a CNAME.
-- **`repository_dispatch` activation**: PAT needed for automated cv → website triggering.
+- ~~**`repository_dispatch` activation**~~: dropped. No PAT is to be created — the website's ADR-0007 forbids a satellite holding any GitHub credential for the hub. cv publishes to the hub's content bucket over Workload Identity Federation and the hub polls it. See `llm/features/hub-publishing.md`.
 - **`NOTIFICATION_WEBHOOK` configuration**: failure notifications are wired but gated on this secret.
 
 ## Known Issues / Tech Debt

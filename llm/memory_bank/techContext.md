@@ -71,7 +71,7 @@ cv/
 
 ### CI / Deployment
 - GitHub Actions (`build-cv.yml`): on push to master → lint bib → pytest → ruff → render → compile PDF (via `xu-cheng/latex-action` with full TeX Live) → upload PDF + `cv-data.zip` to rolling `latest` release.
-- `repository_dispatch` to website repo is wired but gated on `WEBSITE_DISPATCH_PAT` secret.
+- Publishing to the website (research hub): the `publish` job stages `dist/` (four PDFs, `cv-data/`, `manifest.json`) and calls `djjay0131/website/contract/publish@main`, which uploads it to `gs://<content-bucket>/sources/cv/` over Workload Identity Federation. No GitHub credential for the website repo and no service-account key; the hub polls the bucket. `repository_dispatch` and `WEBSITE_DISPATCH_PAT` are deleted, not disabled. See `llm/features/hub-publishing.md`.
 
 ## Website Repo (`djjay0131/website`)
 

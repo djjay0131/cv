@@ -1,5 +1,17 @@
 # Feature: Personal Website (CV + Papers + Projects) with Data-Driven CV Pipeline
 
+> **SUPERSEDED — historical record, 2026-09-16.**
+> This document describes the `repository_dispatch` design in which `cv` held a
+> `WEBSITE_DISPATCH_PAT` with `repo` scope on the website repository. **That design was
+> never built and must not be built.** A token able to fire a dispatch at the hub can also
+> write to it, which the hub's ADR-0007 forbids: no satellite holds a GitHub credential for
+> the hub. `cv` now publishes to the hub's content bucket over Workload Identity Federation,
+> and the hub polls that bucket.
+>
+> Kept unedited below because it records what was decided at the time. For the current
+> design see `llm/features/hub-publishing.md`.
+
+
 **Status:** VERIFIED
 **Date:** 2026-04-16
 **Author:** Feature Architect (AI-assisted)
