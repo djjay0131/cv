@@ -1,4 +1,6 @@
 build/
+dist/
+release/
 .venv/
 __pycache__/
 *.pyc

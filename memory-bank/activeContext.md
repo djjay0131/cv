@@ -51,8 +51,10 @@ Any title or text change in a role included by multiple variants will invalidate
 ### Website's `cv-data.test.ts` pins exact pool counts
 Adding 3 projects to `data/content/projects.yaml` broke the website's test (`expect(pool.projects.length).toBe(4)` failed when count became 7). Fix: switch exact counts to `toBeGreaterThanOrEqual(N)` to absorb future additions. Same pattern was already in place for employment (`>= 5`). This is now done for projects (`>= 7`) but other counts (`education: 3`, `skills: 4`) still pin exact values.
 
-### The cv-to-website notify is silently broken
-cv repo's "Notify website repo" step in `Publish release + cv-data` is supposed to trigger a website rebuild via `repository_dispatch` but doesn't. Website only rebuilds on schedule (~2hr) or manual `gh workflow run build.yml --repo djjay0131/website`. Tracked as task #38.
+### The cv-to-website notify is deleted, not fixed (task #38 closed)
+The "Notify website repo" step never worked, and it is not being made to work. The website's ADR-0007 forbids a satellite holding any GitHub credential for the hub: a token able to fire `repository_dispatch` at `website` can also write to it. The step and every reference to `WEBSITE_DISPATCH_PAT` / `vars.WEBSITE_REPO` are deleted from `build-cv.yml`.
+
+cv now publishes `dist/` (four PDFs, `cv-data/`, `manifest.json`) to the hub's GCS content bucket over Workload Identity Federation, and the hub polls that bucket — so a publish appears at the next poll, not immediately. See `llm/features/hub-publishing.md`.
 
 ## Open Issues / Bugs Discovered in PDF Review
 

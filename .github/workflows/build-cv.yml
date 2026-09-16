@@ -137,10 +137,23 @@ jobs:
           retention-days: 30
 
   publish:
-    name: Publish release + cv-data
+    name: Publish release + hub contract
     needs: build
     runs-on: ubuntu-24.04
+    # Gated to master and to non-pull-request events, as the release already
+    # was. A fork PR builds and diffs but can never publish. cv's Workload
+    # Identity provider independently admits only refs/heads/master on this
+    # repository id and refuses pull_request_target, so this gate is the
+    # nearer of two locks, not the only one.
     if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+    permissions:
+      # The "latest" GitHub release, exactly as before.
+      contents: write
+      # The OIDC token the hub's publish action exchanges through Workload
+      # Identity Federation. It is the only credential in this job, it is
+      # minted at run time, and it grants nothing but writes under
+      # gs://<content-bucket>/sources/cv/.
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -151,12 +164,51 @@ jobs:
           pattern: variant-*
           merge-multiple: true
 
-      - name: Stage release files
+      # dist/ is what the hub publishes, so it holds only what the manifest
+      # describes: the four variant PDFs, the cv-data payload and manifest.json.
+      # cv-data.zip is staged under release/ instead, because it is a GitHub
+      # release asset and not part of the published contract.
+      - name: Stage the variant PDFs
         run: |
           mkdir -p dist
           find artifacts -name "*.pdf" -exec cp {} dist/ \;
           ls -la dist/
-          zip -r dist/cv-data.zip data own-bib.bib photo_jason_1.jpeg
+
+      - name: Stage the cv-data payload
+        # Exactly the contents of cv-data.zip, unzipped. The hub reads these
+        # files directly to render the CV pages, so the shape must not change
+        # without a schema_version bump (website ADR-0008 decision 5).
+        run: |
+          set -euo pipefail
+          mkdir -p dist/cv-data
+          cp -R data dist/cv-data/data
+          cp own-bib.bib photo_jason_1.jpeg dist/cv-data/
+          find dist/cv-data -type f | sort
+
+      - name: Pack cv-data.zip for the GitHub release
+        # Built from the same staged payload, so the release asset and what the
+        # hub reads can never drift.
+        run: |
+          set -euo pipefail
+          mkdir -p release
+          (cd dist/cv-data && zip -r "$GITHUB_WORKSPACE/release/cv-data.zip" \
+            data own-bib.bib photo_jason_1.jpeg)
+          unzip -l release/cv-data.zip
+
+      - name: Generate the hub publishing manifest
+        # dist/manifest.json, at the root of dist/. Generated from
+        # data/variants/*.yaml — the same discovery the `configure` job uses —
+        # so the manifest cannot drift from the matrix that built the PDFs.
+        # A venv rather than actions/setup-python: this job needs two pure-Python
+        # packages for one command, and adding a third-party action here would
+        # be more moving parts than it saves.
+        run: |
+          set -euo pipefail
+          python3 -m venv .venv
+          .venv/bin/pip install --quiet --upgrade pip
+          .venv/bin/pip install --quiet pyyaml pydantic
+          .venv/bin/python -m tools.manifest --dist dist
+          cat dist/manifest.json
 
       - name: Upload combined workflow artifact
         uses: actions/upload-artifact@v4
@@ -164,7 +216,8 @@ jobs:
           name: cv-${{ github.sha }}
           path: |
             dist/*.pdf
-            dist/cv-data.zip
+            dist/manifest.json
+            release/cv-data.zip
           retention-days: 30
 
       - name: Update "latest" release
@@ -175,23 +228,28 @@ jobs:
           body: "Automated build from ${{ github.sha }}."
           files: |
             dist/*.pdf
-            dist/cv-data.zip
+            release/cv-data.zip
           make_latest: "true"
           prerelease: false
 
-      # Cross-repo trigger to the website repo. Disabled until a PAT and the
-      # target repo exist (M2 sets this up). Set the secret WEBSITE_DISPATCH_PAT
-      # to a PAT with "repo" scope on the website repo to enable.
-      - name: Notify website repo
-        if: env.WEBSITE_DISPATCH_ENABLED == 'true'
-        env:
-          WEBSITE_DISPATCH_ENABLED: ${{ secrets.WEBSITE_DISPATCH_PAT != '' && 'true' || 'false' }}
-          PAT: ${{ secrets.WEBSITE_DISPATCH_PAT }}
-          WEBSITE_REPO: ${{ vars.WEBSITE_REPO }}   # e.g. "djjay0131/website"
-        run: |
-          curl -sSf -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${PAT}" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${WEBSITE_REPO}/dispatches" \
-            -d '{"event_type":"cv-updated","client_payload":{"sha":"${{ github.sha }}"}}'
+      # Publish through the research hub's own composite action. It validates
+      # manifest.json against the hub's schema, checks that every path stays
+      # inside dist/, checks that the manifest's source matches the `source`
+      # input, and only then exchanges this job's OIDC token for a short-lived
+      # GCP credential and uploads dist/ to gs://<bucket>/sources/cv/.
+      #
+      # cv holds NO GitHub credential for the website repository and no
+      # service-account key. The hub polls the bucket; it is not notified
+      # (website ADR-0007). The four vars.* below are GitHub Actions variables,
+      # not secrets — none of them is secret, and treating them as secrets only
+      # makes failures harder to read. `dist` and `source` are literals.
+      # See docs/satellites.md in the website repository.
+      - name: Publish to the research hub
+        uses: djjay0131/website/contract/publish@main
+        with:
+          dist: ./dist
+          source: cv
+          project_id: ${{ vars.GCP_PROJECT_ID }}
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_PUBLISH_SA }}
+          bucket: ${{ vars.GCP_CONTENT_BUCKET }}

@@ -87,8 +87,11 @@ cv repo PR → CI: build-cv workflow
   ├── Python tests & lint
   ├── Discover variants
   ├── Compile <each variant>      ← visual regression here
-  └── Publish release + cv-data   ← only runs on master, NOT on PRs
-       └── (intended) Notify website repo via repository_dispatch
+  └── Publish release + hub contract  ← only runs on master, NOT on PRs
+       ├── "latest" GitHub release (PDFs + cv-data.zip)
+       └── djjay0131/website/contract/publish@main
+            └── validates manifest.json, then uploads dist/ over WIF to
+                gs://<content-bucket>/sources/cv/   (no GitHub credential)
 
 website repo
   ├── Scheduled rebuild (every ~2hr)
