@@ -245,7 +245,7 @@ jobs:
       # makes failures harder to read. `dist` and `source` are literals.
       # See docs/satellites.md in the website repository.
       - name: Publish to the research hub
-        uses: djjay0131/website/contract/publish@f98a928a1b92b2248b130822ba5098fb926b8898 # main
+        uses: djjay0131/website/contract/publish@v1
         with:
           dist: ./dist
           source: cv
