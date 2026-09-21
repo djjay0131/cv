@@ -19,6 +19,7 @@ sections:
     include:
       - phd-cs-vt
       - meng-cs-vt
+      - mit-vt
       - bs-econ-vt
 
   - type: projects
