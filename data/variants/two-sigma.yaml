@@ -1,0 +1,51 @@
+variant: two-sigma
+label: "Two Sigma PhD Fellowship"
+description: "Research-fellowship CV for the Two Sigma PhD Fellowship: empirical evaluation of AI/agentic systems, publications, and production-grade engineering depth. Reusable base for other research fellowships (Jane Street, MSR)."
+theme:
+  style: refined-serif
+  photo: false
+sections:
+  - type: summary
+    content_id: two-sigma
+  - type: employment
+    include:
+      - id: vt-doctoral-research
+        bullets: [vt-research-genai-evidence, vt-research-agentic-se, vt-research-agentic-kg, vt-research-construction-ai, vt-research-vvuq]
+      - id: vt-gra-mrs
+        bullets: [vt-gra-mrs-overview]
+      - id: yoh-adf-architect
+        bullets: [yoh-mvp, yoh-llm, yoh-api]
+      - id: duck-creek-architect
+        bullets: [dc-sev1, dc-pen-testing]
+      - id: blackbaud-principal
+        collapse: true
+      - id: blackbaud-solutions
+        collapse: true
+      - id: djjaynet-consultant
+        collapse: true
+      - id: limeleap-chief-engineer
+        collapse: true
+      - id: limeleap-director-productivity
+        collapse: true
+  - type: education
+    include:
+      - phd-cs-vt
+      - meng-cs-vt
+      - mit-vt
+      - bs-econ-vt
+  - type: publications
+  - type: projects
+    include:
+      - agentic-kg
+      - vttsi
+      - vvuq-beam-solver
+      - construction-ai
+  - type: skills
+    include:
+      - ai-ml
+      - id: languages
+        items: [Python, C#, Java, JavaScript, Bash, PowerShell, T-SQL, "C++", Node.js]
+      - id: tools
+        items: [Azure, AWS, Docker, FastAPI, Streamlit, PostgreSQL, "SQL Server", VS Code, PyCharm, Wireshark]
+      - platforms
+  - type: misc
