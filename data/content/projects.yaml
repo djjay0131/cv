@@ -47,7 +47,7 @@
   summary: >-
     Verification, Validation, and Predictive Uncertainty Quantification of
     a finite-difference beam solver for residential LVL header design
-    (AOE/CS/ME 6444 final paper, Spring 2026; advisor Dr.\ Christopher Roy;
+    (AOE/CS/ME 6444 final paper, Spring 2026; advisor Dr. Christopher Roy;
     coauthor Cheng-Shun Chuang). Planned extension into a reusable VVUQ
     framework.
 

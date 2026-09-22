@@ -9,7 +9,7 @@
 
 - id: research-professional
   text: >-
-    Computer Science PhD candidate and applied researcher who bridges large-scale
+    Computer Science PhD student and applied researcher who bridges large-scale
     software engineering with empirical AI/ML research. Two decades architecting
     Azure data platforms and SaaS systems now grounds research that is reproducible,
     deployable, and measured against real workloads, spanning LLM-assisted software
@@ -33,7 +33,7 @@
 
 - id: fellowship
   text: >-
-    PhD candidate in Computer Science (SE with AI/ML/MI) at Virginia Tech, focused on
+    PhD student in Computer Science (SE with AI/ML/MI) at Virginia Tech, focused on
     the empirical methodology of evaluating LLM behavior and accumulating verifiable
     safety claims. Two papers on evidence-based reasoning in GenAI tools and knowledge
     accumulation in software engineering research (**ICSE 2026**; arXiv preprint).
@@ -41,3 +41,17 @@
     ML-driven incident prediction, behavioral evals --- with **20+ years of secure-software
     delivery** (CSSLP-certified, recent mesh-VPN/2FA platform hardening at Virginia
     Tech's ARCADE Lab).
+
+- id: two-sigma
+  text: >-
+    PhD student in Computer Science at Virginia Tech (third year) studying how
+    AI-assisted and agentic software systems should be evaluated: experiments
+    whose claims are verifiable, measured against real workloads, and
+    reproducible (**ICSE 2026**; arXiv preprints). Current work builds a
+    taxonomy and evidence map for agentic software engineering, pilot
+    experiments on coding-agent memory (time, cost, tokens, accuracy), and
+    LLM-curated knowledge graphs as provenance substrates for grounded
+    reasoning. **20+ years** architecting Azure data platforms and large-scale
+    SaaS systems means research artifacts are built to production standards ---
+    ports-and-adapters services, deterministic baselines with honest-null
+    ablations, and VVUQ-style uncertainty quantification.

@@ -4,6 +4,13 @@
   location: "Blacksburg, VA"
   title: "Doctoral Researcher --- Software Engineering with AI/ML/MI"
   bullets:
+    - id: vt-research-agentic-se
+      text: >-
+        Leading a state-of-the-art review of **agentic software engineering**
+        --- a taxonomy of coding-agent harnesses, an evidence map over ~270
+        curated sources, and a pilot experiment on evaluating memory management
+        in coding agents (time, cost, tokens, accuracy) --- with collaborators
+        at Virginia Tech.
     - id: vt-research-agentic-kg
       text: >-
         Researching **LLM-curated knowledge graphs** as a provenance
@@ -32,7 +39,7 @@
         Coauthored **Verification, Validation, and Predictive
         Uncertainty Quantification of an Euler--Bernoulli Beam
         Finite-Difference Model** (AOE/CS/ME 6444, Spring 2026; advisor
-        Dr.~Christopher Roy; coauthor Cheng-Shun Chuang) --- planned
+        Dr. Christopher Roy; coauthor Cheng-Shun Chuang) --- planned
         extension into a reusable VVUQ framework for engineering
         simulation.
 - id: vt-gra-mrs
