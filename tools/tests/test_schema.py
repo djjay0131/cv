@@ -232,6 +232,52 @@ class TestVariant:
         assert v.label is None
         assert v.description is None
 
+    def test_grouping_and_visibility_defaults(self) -> None:
+        v = Variant(
+            variant="academic",
+            sections=[VariantSection(type="summary", content_id="s-a")],
+        )
+        assert v.track == "both"
+        assert v.length == "full"
+        # Private by default (website ADR-0016).
+        assert v.visibility == "private"
+
+    def test_grouping_and_visibility_accept_known_values(self) -> None:
+        v = Variant(
+            variant="one-page",
+            track="both",
+            length="one-page",
+            visibility="public",
+            sections=[VariantSection(type="summary", content_id="s-a")],
+        )
+        assert v.track == "both"
+        assert v.length == "one-page"
+        assert v.visibility == "public"
+
+    def test_unknown_track_rejected(self) -> None:
+        with pytest.raises(ValidationError):
+            Variant(
+                variant="x",
+                track="academia",
+                sections=[VariantSection(type="summary", content_id="s-a")],
+            )
+
+    def test_unknown_length_rejected(self) -> None:
+        with pytest.raises(ValidationError):
+            Variant(
+                variant="x",
+                length="three-page",
+                sections=[VariantSection(type="summary", content_id="s-a")],
+            )
+
+    def test_unknown_visibility_rejected(self) -> None:
+        with pytest.raises(ValidationError):
+            Variant(
+                variant="x",
+                visibility="secret",
+                sections=[VariantSection(type="summary", content_id="s-a")],
+            )
+
 
 class TestLoadContent:
     def test_item_validation_error_includes_path_and_item(self, tmp_path: Path) -> None:

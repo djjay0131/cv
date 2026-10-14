@@ -1,6 +1,9 @@
-variant: sde-long
-label: "Software Engineer"
-description: "Detailed software-engineering resume emphasizing platform architecture and delivery."
+variant: professional-2p
+label: "Professional résumé (2 pages)"
+description: "Software-engineering résumé emphasizing platform architecture and delivery."
+track: professional
+length: two-page
+visibility: public
 
 sections:
   - type: summary
@@ -8,18 +11,17 @@ sections:
 
   - type: employment
     include:
-      - yoh-adf-architect
+      - id: yoh-adf-architect
+        bullets:
+          - yoh-mvp
+          - yoh-api
 
       - id: duck-creek-architect
         bullets:
           - dc-launch-detailed
           - dc-integration-detailed
-          - dc-adf
-          - dc-pen-testing
-          - dc-upgrade-detailed
-          - dc-sso
           - dc-deployment
-          - dc-sev1-detailed
+          - dc-pen-testing
 
       - id: blackbaud-principal
         bullets:
@@ -27,25 +29,15 @@ sections:
           - bb-devops-detailed
           - bb-sla
           - bb-sso-detailed
-          - bb-rest-api
-          - bb-cd-process
-          - bb-training
 
       - id: blackbaud-solutions
         bullets:
           - bb-sa-implementations
           - bb-sa-integrations
-          - bb-sa-atlassian
-          - bb-sa-azure
           - bb-sa-data-migration
-          - bb-sa-conversion
 
       - id: djjaynet-consultant
-        bullets:
-          - dj-crestron
-          - dj-ef
-          - dj-trump-towers
-
+        collapse: true
       - id: limeleap-chief-engineer
         collapse: true
       - id: limeleap-director-productivity
@@ -80,69 +72,42 @@ sections:
 
   - type: skills
     include:
-      - platforms
       - id: tools
         items:
           - SQL Server
-          - MySQL
-          - Oracle
           - PostgreSQL
           - .NET
           - AngularJS
-          - Entity Framework
           - Atlassian
           - TeamCity
           - Azure
-          - Azure API
           - AWS
           - ADO
           - Docker
           - Octopus
-          - R Studio
           - VS Code
           - PyCharm
-          - Wireshark
           - FastAPI
           - Streamlit
       - id: languages
         items:
           - JavaScript
-          - HTML 5.0
-          - CSS
-          - VB.NET
           - "C#"
           - Java
-          - ASP.NET
-          - "C"
+          - VB.NET
           - "C++"
-          - Groovy
-          - Objective C
           - T-SQL
-          - PHP
-          - Scala
           - PowerShell
           - Node.js
           - Python
           - Kotlin
-          - Vue.js
           - Bash
           - Gradle
       - id: ai-ml
         items:
           - scikit-learn
           - TensorFlow
-          - KNN
-          - RNN
-          - CNN
-          - LSTM
           - LLM
           - SVM
-          - Linear Regression
           - Random Forest
-          - Naive Bayes
           - Feature Engineering
-
-  - type: misc
-
-  - type: referee
-    content_id: available

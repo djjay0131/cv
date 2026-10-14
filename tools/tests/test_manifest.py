@@ -13,6 +13,7 @@ _MINIMAL_VARIANT = """\
 variant: {name}
 label: "{label}"
 description: "{description}"
+visibility: public
 
 sections:
   - type: summary
@@ -129,12 +130,12 @@ class TestBuildManifest:
         assert len(data_items) == 1
         assert data_items[0]["slug"] == "cv-data"
         assert data_items[0]["path"] == "cv-data/"
-        assert data_items[0]["schema_version"] == "1"
+        assert data_items[0]["schema_version"] == m.CV_DATA_SCHEMA_VERSION
         for other in manifest["items"]:
             if other["format"] != "data":
                 assert "schema_version" not in other
 
-    def test_every_item_is_public_and_in_the_cv_section(self, tmp_path: Path) -> None:
+    def test_every_item_is_in_the_cv_section(self, tmp_path: Path) -> None:
         variants = tmp_path / "variants"
         _write_variant(variants, "academic")
         _write_variant(variants, "sde-long")
@@ -142,8 +143,38 @@ class TestBuildManifest:
 
         manifest = m.build_manifest(dist=dist, variants_dir=variants, date="2026-09-14")
 
-        assert {i["visibility"] for i in manifest["items"]} == {"public"}
         assert {i["section"] for i in manifest["items"]} == {"cv"}
+
+    def test_visibility_comes_from_each_variant(self, tmp_path: Path) -> None:
+        variants = tmp_path / "variants"
+        _write_variant(variants, "academic")
+        _write_variant(
+            variants,
+            "fellowship",
+            body='variant: fellowship\nlabel: "Fellowship CV"\nvisibility: private\n\n'
+            "sections:\n  - type: summary\n",
+        )
+        dist = _stage(tmp_path / "dist", "academic", "fellowship")
+
+        manifest = m.build_manifest(dist=dist, variants_dir=variants, date="2026-09-14")
+        by_slug = {i["slug"]: i["visibility"] for i in manifest["items"]}
+        assert by_slug["academic"] == "public"
+        assert by_slug["fellowship"] == "private"
+        # The shared cv-data payload stays public so the hub can render it.
+        assert by_slug["cv-data"] == "public"
+
+    def test_visibility_defaults_to_private(self, tmp_path: Path) -> None:
+        # ADR-0016: private-by-default. A variant that says nothing is private.
+        variants = tmp_path / "variants"
+        _write_variant(
+            variants,
+            "academic",
+            body='variant: academic\nlabel: "Academic CV"\n\nsections:\n  - type: summary\n',
+        )
+        dist = _stage(tmp_path / "dist", "academic")
+
+        manifest = m.build_manifest(dist=dist, variants_dir=variants, date="2026-09-14")
+        assert manifest["items"][0]["visibility"] == "private"
 
     def test_description_is_optional(self, tmp_path: Path) -> None:
         variants = tmp_path / "variants"
@@ -260,7 +291,7 @@ class TestBuildManifest:
 class TestRealRepositoryData:
     """The manifest cv actually publishes, from cv's actual variant files."""
 
-    def test_the_four_variants_and_cv_data(self, tmp_path: Path) -> None:
+    def test_the_six_variants_and_cv_data(self) -> None:
         repo_root = Path(__file__).resolve().parents[2]
         manifest = m.build_manifest(
             variants_dir=repo_root / "data" / "variants",
@@ -268,13 +299,23 @@ class TestRealRepositoryData:
             check_staged=False,
         )
         assert [i["slug"] for i in manifest["items"]] == [
-            "academic",
             "anthropic-fellow",
-            "research-professional",
-            "sde-long",
+            "one-page",
+            "professional-2p",
+            "professional-full",
+            "research-2p",
+            "research-full",
             "cv-data",
         ]
-        assert manifest["items"][0]["title"] == "Academic CV"
+        by_slug = {i["slug"]: i for i in manifest["items"]}
+        assert by_slug["research-full"]["title"] == "Full research CV"
+        assert by_slug["one-page"]["title"] == "One-page résumé"
+        # D22 / ADR-0024: exactly one private variant, the Anthropic Fellow CV.
+        assert by_slug["anthropic-fellow"]["visibility"] == "private"
+        for slug in ("one-page", "research-2p", "professional-2p", "research-full",
+                     "professional-full", "cv-data"):
+            assert by_slug[slug]["visibility"] == "public"
+        assert manifest["items"][-1]["schema_version"] == m.CV_DATA_SCHEMA_VERSION
 
 
 class TestWriteManifest:

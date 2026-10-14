@@ -1,0 +1,59 @@
+variant: one-page
+label: "One-page résumé"
+description: "One-page résumé spanning empirical AI/ML research and two decades of software engineering."
+track: both
+length: one-page
+visibility: public
+
+sections:
+  - type: summary
+    content_id: research-professional
+
+  - type: employment
+    include:
+      - id: vt-doctoral-research
+        bullets: [vt-research-agentic-kg]
+      - id: yoh-adf-architect
+        bullets: [yoh-mvp]
+      - id: duck-creek-architect
+        bullets: [dc-sev1]
+      - id: blackbaud-principal
+        bullets: [bb-root-cause]
+      - id: blackbaud-solutions
+        collapse: true
+      - id: djjaynet-consultant
+        collapse: true
+
+  - type: education
+    include:
+      - phd-cs-vt
+      - meng-cs-vt
+      - bs-econ-vt
+
+  - type: skills
+    include:
+      - id: ai-ml
+        items:
+          - scikit-learn
+          - TensorFlow
+          - LLM
+          - SVM
+          - Random Forest
+          - Feature Engineering
+      - id: tools
+        items:
+          - Azure
+          - AWS
+          - Docker
+          - PostgreSQL
+          - SQL Server
+          - FastAPI
+          - Streamlit
+      - id: languages
+        items:
+          - Python
+          - "C#"
+          - Java
+          - JavaScript
+          - T-SQL
+          - Bash

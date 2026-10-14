@@ -1,6 +1,9 @@
-variant: academic
-label: "Academic CV"
+variant: research-full
+label: "Full research CV"
 description: "Full curriculum vitae with publications, research, and complete employment history."
+track: research
+length: full
+visibility: public
 
 sections:
   - type: summary

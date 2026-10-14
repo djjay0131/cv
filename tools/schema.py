@@ -133,6 +133,11 @@ class VariantTheme(_StrictModel):
     photo: bool = True
 
 
+VariantTrack = Literal["research", "professional", "both"]
+VariantLength = Literal["one-page", "two-page", "full"]
+VariantVisibility = Literal["public", "private"]
+
+
 class VariantSection(_StrictModel):
     type: str = Field(min_length=1)
     include: Optional[list] = None
@@ -152,6 +157,15 @@ class Variant(_StrictModel):
     extends: Optional[str] = None
     label: Optional[str] = None
     description: Optional[str] = None
+    # Grouping metadata carried in the cv-data payload (ADR-0024, owner D22).
+    # The hub groups the one CV section by `track` and `length` without parsing
+    # titles. Defaults keep the payload backward-compatible; every shipped
+    # variant declares all three explicitly.
+    track: VariantTrack = "both"
+    length: VariantLength = "full"
+    # Private by default (website ADR-0016): an item is public only when this
+    # says `public` AND the hub's publish allowlist names its (source, slug).
+    visibility: VariantVisibility = "private"
     theme: VariantTheme = Field(default_factory=VariantTheme)
     sections: list[VariantSection] = Field(min_length=1)
     raw_overrides: dict[str, RawOverride] = Field(default_factory=dict)

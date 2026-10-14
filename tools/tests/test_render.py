@@ -179,6 +179,8 @@ def test_theme_file_written_with_defaults(tmp_path: Path) -> None:
     theme = (output_dir / "_theme.tex").read_text()
     assert r"\def\cvtheme{classic}" in theme
     assert r"\def\cvphoto{true}" in theme
+    # The default test variant declares a publications section.
+    assert r"\def\cvpublications{true}" in theme
 
 
 def test_theme_file_written_for_refined_serif_no_photo(tmp_path: Path) -> None:
@@ -201,6 +203,28 @@ def test_theme_file_written_for_refined_serif_no_photo(tmp_path: Path) -> None:
     theme = (output_dir / "_theme.tex").read_text()
     assert r"\def\cvtheme{refined-serif}" in theme
     assert r"\def\cvphoto{false}" in theme
+
+
+def test_theme_file_marks_publications_off_when_the_variant_omits_them(tmp_path: Path) -> None:
+    content_dir = _setup_content(tmp_path)
+    variants_dir = tmp_path / "variants"
+    _write(
+        variants_dir / "short.yaml",
+        "variant: short\nsections:\n  - type: summary\n    content_id: s-a\n",
+    )
+    templates_dir = _setup_templates(tmp_path)
+    output_dir = tmp_path / "out"
+
+    render(
+        "short",
+        content_dir=content_dir,
+        variants_dir=variants_dir,
+        templates_dir=templates_dir,
+        output_dir=output_dir,
+    )
+
+    theme = (output_dir / "_theme.tex").read_text()
+    assert r"\def\cvpublications{false}" in theme
 
 
 def test_raw_override_bypasses_template(tmp_path: Path) -> None:

@@ -58,13 +58,25 @@ def _render_preamble(resolved: dict) -> str:
 
 
 def _render_theme(variant) -> str:
-    """Build a LaTeX fragment declaring the variant's theme style + photo flag.
+    """Build a LaTeX fragment declaring per-variant compile-time flags.
 
     cv-llt.tex \\input's this file before \\begin{document} and dispatches on
     \\cvtheme / \\cvphoto via \\ifdefstring.
+
+    \\cvpublications records whether the variant declares a ``publications``
+    section; the bibliography has no Jinja template (biblatex renders it from
+    own-bib.bib) so it cannot be emitted as an empty fragment the way the other
+    sections are. cv-llt.tex gates \\input{publications} on this flag, which lets
+    a short variant (a one-pager) omit publications entirely.
     """
     photo = "true" if variant.theme.photo else "false"
-    return f"\\def\\cvtheme{{{variant.theme.style}}}\n\\def\\cvphoto{{{photo}}}\n"
+    declared = {s.type for s in variant.sections}
+    publications = "true" if "publications" in declared else "false"
+    return (
+        f"\\def\\cvtheme{{{variant.theme.style}}}\n"
+        f"\\def\\cvphoto{{{photo}}}\n"
+        f"\\def\\cvpublications{{{publications}}}\n"
+    )
 
 
 def render(

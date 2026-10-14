@@ -48,16 +48,17 @@ _DEFAULT_VARIANTS_DIR = Path("data/variants")
 # action, which rejects a mismatch before authenticating.
 SOURCE = "cv"
 
-# Every cv item belongs to the hub's `cv` section and is public. Private items
-# are a hub Phase 3 capability; cv has nothing private to publish.
+# Every cv item belongs to the hub's `cv` section.
 SECTION = "cv"
-VISIBILITY = "public"
 
 # The one `format: data` item. The hub renders exactly the (source, slug) pair
 # ("cv", "cv-data") with first-party code and fails its build on any other data
-# item, so neither the slug nor the path is a free choice.
+# item, so neither the slug nor the path is a free choice. The shared payload
+# stays public so the hub can render the CV pages from it; per-variant
+# visibility governs the individual PDF items, not the payload (ADR-0016).
 CV_DATA_SLUG = "cv-data"
 CV_DATA_PATH = "cv-data/"
+CV_DATA_VISIBILITY = "public"
 CV_DATA_TITLE = "CV source data"
 CV_DATA_SUMMARY = (
     "Content pool, variant selectors, bibliography and photo: the data the hub "
@@ -69,7 +70,11 @@ CV_DATA_SUMMARY = (
 # structure changes — a renamed or removed YAML key, a moved file, a changed
 # directory layout — and never for an edit to the CV's text. See
 # llm/features/hub-publishing.md.
-CV_DATA_SCHEMA_VERSION = "1"
+#
+# "2" (owner D22, ADR-0024): each variant selector now carries `track`,
+# `length` and `visibility`, which the hub reads to group the one CV section
+# and to compute effective visibility alongside its publish allowlist.
+CV_DATA_SCHEMA_VERSION = "2"
 
 # Mirrors of the hub schema's constraints, so a violation is reported here with
 # cv's own file names rather than by the publish action after the fact.
@@ -161,7 +166,7 @@ def _variant_item(variant_name: str, variants_dir: Path, date: str) -> dict:
         "section": SECTION,
         "format": "pdf",
         "path": f"{variant_name}.pdf",
-        "visibility": VISIBILITY,
+        "visibility": variant.visibility,
         "date": date,
     }
 
@@ -184,7 +189,7 @@ def _cv_data_item(date: str) -> dict:
         "section": SECTION,
         "format": "data",
         "path": CV_DATA_PATH,
-        "visibility": VISIBILITY,
+        "visibility": CV_DATA_VISIBILITY,
         "date": date,
         "summary": CV_DATA_SUMMARY,
         "schema_version": CV_DATA_SCHEMA_VERSION,

@@ -106,8 +106,10 @@
 
 % Publications are rendered by biblatex directly from own-bib.bib; see publications.tex.
 % Placed early (after Education) so research credibility is visible before Projects/Skills for
-% research-oriented variants.
-\input{publications}
+% research-oriented variants. Gated on \cvpublications (from build/<variant>/tex/_theme.tex),
+% which tools.render sets from the variant's declared sections, so a variant that omits
+% `publications` (a one-pager) does not render the bibliography at all.
+\ifdefstring{\cvpublications}{true}{\input{publications}}{}
 
 \makerubric{build/\cvvariant/tex/projects}
 \makerubric{build/\cvvariant/tex/skills}
