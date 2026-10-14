@@ -19,6 +19,9 @@ dev = [
     "pytest>=8.0",
     "pytest-cov>=5.0",
     "ruff>=0.4",
+    # Page-budget checking (tools/page_budget.py). Dev-only: the check job and
+    # the unit tests use it; the render/publish path never imports pypdf.
+    "pypdf>=4,<7",
 ]
 
 [tool.setuptools]

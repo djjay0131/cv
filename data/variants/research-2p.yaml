@@ -1,0 +1,82 @@
+variant: research-2p
+label: "Research résumé (2 pages)"
+description: "Research-focused résumé for industry R&D and applied-research roles."
+track: research
+length: two-page
+visibility: public
+
+theme:
+  style: refined-serif
+  photo: false
+
+sections:
+  - type: summary
+    content_id: research-professional
+
+  - type: employment
+    include:
+      - id: vt-gra-mrs
+        bullets: [vt-gra-mrs-overview, vt-gra-mrs-security]
+      - id: yoh-adf-architect
+        bullets: [yoh-mvp, yoh-llm]
+      - id: duck-creek-architect
+        bullets: [dc-sev1, dc-pen-testing]
+      - id: blackbaud-principal
+        collapse: true
+      - id: blackbaud-solutions
+        collapse: true
+      - id: djjaynet-consultant
+        collapse: true
+
+  - type: education
+    include:
+      - phd-cs-vt
+      - meng-cs-vt
+      - bs-econ-vt
+
+  - type: publications
+
+  - type: projects
+    include:
+      - agentic-kg
+      - vttsi
+      - construction-ai
+
+  - type: skills
+    include:
+      - platforms
+      - id: ai-ml
+        items:
+          - scikit-learn
+          - TensorFlow
+          - LLM
+          - RNN
+          - CNN
+          - LSTM
+          - SVM
+          - Random Forest
+          - Feature Engineering
+      - id: tools
+        items:
+          - Azure
+          - Azure API
+          - AWS
+          - Docker
+          - PostgreSQL
+          - SQL Server
+          - FastAPI
+          - Streamlit
+          - VS Code
+          - PyCharm
+          - Wireshark
+      - id: languages
+        items:
+          - Python
+          - "C#"
+          - Java
+          - JavaScript
+          - Bash
+          - PowerShell
+          - T-SQL
+          - "C++"
+          - Node.js

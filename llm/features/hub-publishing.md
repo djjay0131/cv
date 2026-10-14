@@ -15,23 +15,30 @@ release and unzipped `cv-data.zip`. Now cv pushes a finished folder to a Google
 Cloud Storage bucket and the hub polls that bucket. The hub no longer knows
 anything about cv's releases, its build or its LaTeX.
 
-Nothing about the CV itself changed: same variants, same PDFs, same visual
-regression gate, same `latest` release with the same assets.
+The publishing mechanism below is unchanged. The **variant set and per-variant
+visibility** changed on 2026-10-14 (owner D22, website ADR-0024): the six
+documents are `one-page`, `research-2p`, `professional-2p`, `research-full`,
+`professional-full` and the private `anthropic-fellow`; each variant selector now
+carries `track`, `length` and `visibility`, and CI enforces the page budget in
+`tools/page_budget.py`. `research-professional` was retired (its content became
+`research-2p`).
 
 ## The interface, in one sentence
 
 The `publish` job stages a `dist/` folder, writes a `manifest.json` at its root
 describing what is in it, and hands both to the hub's composite action
-`djjay0131/website/contract/publish@main`, which validates the manifest and
+`djjay0131/website/contract/publish@v1`, which validates the manifest and
 uploads `dist/` to `gs://<content-bucket>/sources/cv/`.
 
 ```
 dist/
 ├── manifest.json          the whole interface
-├── academic.pdf
+├── one-page.pdf
+├── research-2p.pdf
+├── professional-2p.pdf
+├── research-full.pdf
+├── professional-full.pdf
 ├── anthropic-fellow.pdf
-├── research-professional.pdf
-├── sde-long.pdf
 └── cv-data/
     ├── data/content/*.yaml
     ├── data/variants/*.yaml
@@ -45,16 +52,23 @@ from the same staged directory, so they cannot drift.
 ## The manifest
 
 `dist/manifest.json` is generated, never hand-maintained, by
-`tools/manifest.py` (`python -m tools.manifest --dist dist`). It describes five
+`tools/manifest.py` (`python -m tools.manifest --dist dist`). It describes seven
 items:
 
 | slug | format | path | comes from |
 |---|---|---|---|
-| `academic` | `pdf` | `academic.pdf` | `data/variants/academic.yaml` |
+| `one-page` | `pdf` | `one-page.pdf` | `data/variants/one-page.yaml` |
+| `research-2p` | `pdf` | `research-2p.pdf` | `data/variants/research-2p.yaml` |
+| `professional-2p` | `pdf` | `professional-2p.pdf` | `data/variants/professional-2p.yaml` |
+| `research-full` | `pdf` | `research-full.pdf` | `data/variants/research-full.yaml` |
+| `professional-full` | `pdf` | `professional-full.pdf` | `data/variants/professional-full.yaml` |
 | `anthropic-fellow` | `pdf` | `anthropic-fellow.pdf` | `data/variants/anthropic-fellow.yaml` |
-| `research-professional` | `pdf` | `research-professional.pdf` | `data/variants/research-professional.yaml` |
-| `sde-long` | `pdf` | `sde-long.pdf` | `data/variants/sde-long.yaml` |
 | `cv-data` | `data` | `cv-data/` | the staged payload above |
+
+Each variant item's `visibility` is read from that variant's `visibility:` field
+(default `private`). The hub treats it as a **request**: an item is public only
+when this says `public` **and** the hub's committed publish allowlist names its
+`(source, slug)`. The Anthropic Fellow CV is `private` and is not allowlisted.
 
 The variant items are **discovered**, exactly as the workflow's `configure` job
 discovers its build matrix: every `data/variants/*.yaml` becomes an item. Add a
@@ -71,9 +85,10 @@ than in the hub's action afterwards.
 
 ## `schema_version`
 
-The `cv-data` item carries `schema_version`, currently `"1"`. It versions the
+The `cv-data` item carries `schema_version`, currently `"2"`. It versions the
 **shape** of the payload, not its contents, and the hub fails its build on a
-value it does not recognise.
+value it does not recognise. `"2"` added `track`, `length` and `visibility` to
+each variant selector (owner D22, website ADR-0024).
 
 Bump it when the payload's structure changes in a way hub code must be taught:
 a renamed, removed or re-typed YAML key, a moved or renamed file, a changed
@@ -125,7 +140,7 @@ regression gate, the `latest` release — is unaffected.
 
 ## The GitHub release is unchanged
 
-`latest` still carries the four PDFs and `cv-data.zip`, and still has consumers
+`latest` still carries the six PDFs and `cv-data.zip`, and still has consumers
 outside the hub. It is not part of the hub contract and was not touched beyond
 moving where the zip is staged.
 

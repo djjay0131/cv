@@ -1,6 +1,9 @@
 variant: anthropic-fellow
-label: "Anthropic Fellow application"
+label: "Anthropic Fellow CV"
 description: "Researcher CV targeting the Anthropic Fellows Program: alignment, mech-interp, and secure-software depth."
+track: both
+length: full
+visibility: private
 
 theme:
   style: refined-serif
