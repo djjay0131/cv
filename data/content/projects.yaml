@@ -3,11 +3,12 @@
   url: "https://arcade.mlsoc.vt.edu/"
   summary: >-
     Designed and built the cloud-and-edge architecture for the ARCADE Lab's
-    Multi Robot System for remote construction-progress monitoring: Google
-    Cloud (REST API + web apps), Tailscale mesh VPN for robot networking,
-    Raspberry Pi edge nodes handling internal VPN routing and onboard video
-    encoding, 2FA-hardened Web UI. Architecture completed and proven in a
-    5-week GRA appointment; **Claude used as engineering partner throughout**.
+    Multi Robot System for remote construction-progress monitoring during a
+    5-week GRA appointment (April--May 2026): Google Cloud (REST API + web
+    apps), Tailscale mesh VPN for robot networking, Raspberry Pi edge nodes
+    handling internal VPN routing and onboard video encoding,
+    Terraform-based infrastructure-as-code and CI/CD pipelines, and a
+    2FA-hardened Web UI. **Claude used as engineering partner throughout**.
 
 - id: vttsi
   name: "VTTSI --- LLM-Adaptive Intersection Safety Scoring"
@@ -68,20 +69,10 @@
   summary: "Time-series modeling using ML regressors."
 
 # ---------------------------------------------------------------------------
-# The three entries below were surfaced from reference-framing on 2026-07-19
+# The two entries below were surfaced from reference-framing on 2026-07-19
 # and detailed on 2026-07-21 (Sprint Day 3) from Jason's answers to
 # contribution/status/date verification questions.
 # ---------------------------------------------------------------------------
-
-- id: remote-robotics-control
-  name: "Remote Robotics Control Platform"
-  summary: >-
-    Solo end-to-end architecture and implementation of a cloud-and-edge
-    platform for remotely operating robots over the internet (2024--2026).
-    Google Cloud hosted the API and web apps; a Tailscale mesh VPN
-    connected the robot fleet; Raspberry Pi edge nodes handled internal
-    VPN routing and onboard camera video encoding. Built with
-    LLM-assisted engineering throughout using Claude.
 
 - id: llm-data-importer
   name: "LLM-Assisted Data Importer (Insurance)"
